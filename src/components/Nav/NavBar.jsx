@@ -1,10 +1,10 @@
 import { Component } from "react";
 
 import "./NavBar.css";
-import logo from "../Assets/logo.svg";
-import cartIcon from "../Assets/emptyCart.svg";
-import chevronIcon from "../Assets/chevron.png";
-import CurrencySelector from "./CurrencySelector";
+import logo from "../../Assets/logo.svg";
+import cartIcon from "../../Assets/emptyCart.svg";
+import chevronIcon from "../../Assets/chevron.png";
+import CurrencySelector from "../CurrencySelector/CurrencySelector";
 import { Link } from "react-router-dom";
 
 export default class NavBar extends Component {

@@ -5,21 +5,22 @@ import axios from "axios";
 import dompurify from "dompurify";
 
 import "./PDP.css";
-import Catch from "./Catch";
+import Catch from "../Catch/Catch";
 
 class PDP extends Component {
  state = {
   product: null,
   selectedImage: null,
  };
-
  render() {
-  if (this.state.product) {
+  const { product, selectedImage } = this.state;
+
+  if (product) {
    return (
     <main>
      <div className="pdpContainer">
       <div className="productGallery">
-       {this.state.product.gallery.map((pic, idx) => (
+       {product.gallery.map((pic, idx) => (
         <img
          onMouseOver={() => this.setState({ selectedImage: pic })}
          onClick={() => this.setState({ selectedImage: pic })}
@@ -30,12 +31,12 @@ class PDP extends Component {
        ))}
       </div>
       <div className="selectedImageContainer">
-       <img src={this.state.selectedImage} alt="selected product" />
+       <img src={selectedImage} alt="selected product" />
       </div>
       <div className="actionsContainer">
-       <h1>{this.state.product.brand}</h1>
-       <h4>{this.state.product.name}</h4>
-       {this.state.product.attributes.map((attribute, idx) => (
+       <h1>{product.brand}</h1>
+       <h4>{product.name}</h4>
+       {product.attributes.map((attribute, idx) => (
         <div className="productAttributes" key={idx}>
          <p key={attribute.id}>{attribute.name.toUpperCase()}:</p>
          <ul key={idx}>
@@ -54,19 +55,17 @@ class PDP extends Component {
        ))}
        <p>PRICE:</p>
        <p>
-        {this.state.product.prices[0].currency.symbol}
-        {this.state.product.prices[0].amount}
+        {product.prices[0].currency.symbol}
+        {product.prices[0].amount}
        </p>
-       <button
-        className="addToCartButton"
-        disabled={!this.state.product.inStock}>
+       <button className="addToCartButton" disabled={!product.inStock}>
         ADD TO CART
        </button>
        <p
         // render product description html string
         dangerouslySetInnerHTML={{
          // use dompurify to make sure html from server is not malicious
-         __html: dompurify.sanitize(this.state.product.description),
+         __html: dompurify.sanitize(product.description),
         }}></p>
       </div>
      </div>

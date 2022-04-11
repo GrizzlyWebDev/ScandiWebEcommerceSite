@@ -1,7 +1,7 @@
 import { Component } from "react";
 
 import "./Catch.css";
-import four from "../Assets/fourOhFour.png";
+import four from "../../Assets/fourOhFour.png";
 import { Link } from "react-router-dom";
 
 export default class Catch extends Component {

@@ -2,8 +2,8 @@ import { Component } from "react";
 import axios from "axios";
 
 import "./PLP.css";
-import ProductList from "./ProductList";
-import Catch from "./Catch";
+import ProductList from "../ProductList/ProductList";
+import Catch from "../Catch/Catch";
 
 export default class PLP extends Component {
  state = {
@@ -11,20 +11,18 @@ export default class PLP extends Component {
  };
 
  render() {
+  const { products } = this.state;
+  const { category } = this.props.match.params.category;
   return (
    <main>
-    {this.state.products && (
+    {products && (
      <div className="titleSection">
-      <h1>
-       {this.props.match.params.category
-        ? this.props.match.params.category.toUpperCase()
-        : "ALL"}
-      </h1>
+      <h1>{category ? category.toUpperCase() : "ALL"}</h1>
      </div>
     )}
     <div>
-     {this.state.products && <ProductList products={this.state.products} />}
-     {!this.state.products && <Catch />}
+     {products && <ProductList products={this.state.products} />}
+     {!products && <Catch />}
     </div>
    </main>
   );

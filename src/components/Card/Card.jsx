@@ -2,24 +2,20 @@ import { Component } from "react";
 import { Link } from "react-router-dom";
 
 import "./Card.css";
-import cartIcon from "../Assets/emptyCartWhite.png";
+import cartIcon from "../../Assets/emptyCartWhite.png";
 
 export default class Card extends Component {
  render() {
+  const { product } = this.props;
+
   return (
-   <Link to={`/product/${this.props.product.id}`}>
+   <Link to={`/product/${product.id}`}>
     <div className="cardBody">
      <div className="cardImage">
-      {this.props.product.inStock && (
-       <img src={this.props.product.gallery[0]} alt="product" />
-      )}
-      {!this.props.product.inStock && (
+      {product.inStock && <img src={product.gallery[0]} alt="product" />}
+      {!product.inStock && (
        <>
-        <img
-         className="stockImage"
-         src={this.props.product.gallery[0]}
-         alt="product"
-        />
+        <img className="stockImage" src={product.gallery[0]} alt="product" />
         <p className="stock">OUT OF STOCK</p>
        </>
       )}
@@ -29,11 +25,11 @@ export default class Card extends Component {
      </div>
      <div className="cardDescription">
       <p className="itemName">
-       {this.props.product.brand} {this.props.product.name}
+       {product.brand} {product.name}
       </p>
       <span className="itemPrice">
-       {this.props.product.prices[0].currency.symbol}
-       {this.props.product.prices[0].amount}
+       {product.prices[0].currency.symbol}
+       {product.prices[0].amount}
       </span>
      </div>
     </div>

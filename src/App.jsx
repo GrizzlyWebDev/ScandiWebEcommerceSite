@@ -1,11 +1,11 @@
 import { Component } from "react";
 import { BrowserRouter, Routes, Route, useParams } from "react-router-dom";
 
-import NavBar from "./components/NavBar.jsx";
-import PLP from "./components/PLP.jsx";
-import PDP from "./components/PDP.jsx";
+import NavBar from "./components/Nav/NavBar.jsx";
+import PLP from "./components/PLP/PLP.jsx";
+import PDP from "./components/PDP/PDP.jsx";
 import Cart from "./components/Cart.jsx";
-import Catch from "./components/Catch.jsx";
+import Catch from "./components/Catch/Catch.jsx";
 
 export default class App extends Component {
  render() {
