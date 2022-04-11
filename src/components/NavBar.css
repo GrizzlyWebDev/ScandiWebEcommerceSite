@@ -1,0 +1,112 @@
+
+header {
+    position: relative;
+    display: flex;
+    align-items: center;
+    background-color: white;
+    padding: 10px 10% 0 10%;
+    z-index: 100;
+}
+
+nav {
+    display: flex;
+    width: 33.33%;
+    justify-content: flex-start;
+    cursor: pointer;
+}
+
+.navLinks {
+    display: inline-flex;
+    list-style: none;
+}
+
+.logoContainer {
+    display: flex;
+    justify-content: center;
+    width: 33.33%;
+}
+
+.navButtons {
+    display: flex;
+    justify-content: flex-end;
+    width: 33.33%;
+    cursor:pointer;
+}
+
+.currencyContainer {
+    display: flex;
+}
+
+.navLinks li {
+    padding: 10px 15px 20px 15px
+}
+
+.active {
+    color: rgb(94,206,123);
+    font-weight: 700;
+    border-bottom: 1px solid;
+}
+
+.shopLogo {
+    height: 41px;
+    width: 41px;
+}
+
+.cartIcon {
+    cursor: pointer;
+    height: 20px;
+    width: 20px;
+}
+
+.cartIconContainer {
+    position: relative;
+}
+
+
+.itemsInCart {
+    position: absolute;
+    bottom: 50%;
+    left: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 25px;
+    width: 25px;
+    color: white;
+    font-size: 18px;
+    font-weight: 500;
+    border-radius: 60px;
+    background-color: black;
+}
+
+.currencyIcon {
+    margin: 0;
+    padding: 0;
+    font-weight: 500;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+}
+
+.chevron {
+    height: 6px;
+    width: 3px;
+}
+
+.chevronUpIcon {
+    transform: rotate(180deg);
+}
+
+.chevronContainer {
+    padding: 0;
+    display: flex;
+    align-items: center;
+    margin-top: 5px;
+    margin-right: 20px;
+    margin-left: 5px;
+}
+
+.cartIcon {
+ height: 25px;
+ width: 25px;
+}

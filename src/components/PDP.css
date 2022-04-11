@@ -1,0 +1,118 @@
+.pdpContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 80%;
+    margin-top: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-bottom: 200px;
+}
+
+.productGallery img {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+    object-fit: cover;
+    height: 100px;
+    width: 100px;
+    cursor: pointer;
+    transition: all .2s ease-in-out;
+}
+
+.productGallery img:hover {
+    transform: translateX(2px);
+    transition: all .2s ease-in-out;
+}
+
+.selectedImageContainer img {
+  width: 100%;
+}
+
+.selectedImageContainer {
+    width: 50%;
+}
+
+.actionsContainer {
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.actionsContainer h1 {
+    font-size: 30px;
+    font-weight: 600;
+}
+
+.actionsContainer h4 {
+    font-size: 30px;
+    font-weight: 400;
+    margin-bottom: 20px;
+}
+
+.productAttributes ul {
+    list-style: none;
+    display: flex;
+}
+
+.actionsContainer ul {
+    list-style: none;
+}
+
+.actionsContainer li {
+    margin-bottom: 20px;
+    margin-top: 10px;
+}
+
+.actionsContainer p {
+    margin-top: 15px;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.actionsContainer li button{
+    border: 1px solid #1D1F22;
+    padding: 5px;
+    height: 45px;
+    width: 63px;
+    background: none;
+    font-size: 16px;
+    font-weight: 400;
+    cursor: pointer;
+    margin: 10px 10px 10px 0;
+}
+
+.actionsContainer li button:hover {
+    background: #1D1F22;
+    color: #fff;
+}
+
+.swatch {
+    padding: 20px;
+    display: inline-block;
+    cursor: pointer;
+    margin: 10px 10px 10px 0;
+    border: 1px solid #1D1F22;
+    transition: all .2s ease-in-out;
+}
+
+.swatch:hover {
+    transform: translateY(-1px);
+    transition: all .2s ease-in-out;
+}
+
+.addToCartButton {
+    width: 70%;
+    background: #5ECE7B;
+    color: #fff;
+    font-size: 16px;
+    margin-top: 30px;
+    border: none;
+    padding: 15px 20px;
+    cursor: pointer;
+}
+
+.addToCartButton:disabled {
+    background: #5ece7cc2;
+}
