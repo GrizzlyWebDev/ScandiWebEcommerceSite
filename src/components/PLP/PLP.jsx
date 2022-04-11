@@ -12,7 +12,7 @@ export default class PLP extends Component {
 
  render() {
   const { products } = this.state;
-  const { category } = this.props.match.params.category;
+  const { category } = this.props.match.params;
   return (
    <main>
     {products && (
