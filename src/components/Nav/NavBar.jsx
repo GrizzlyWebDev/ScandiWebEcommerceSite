@@ -7,7 +7,7 @@ import chevronIcon from "../../Assets/chevron.png";
 import CurrencySelector from "../CurrencySelector/CurrencySelector";
 import { NavLink } from "react-router-dom";
 
-export default class NavBar extends Component {
+class NavBar extends Component {
  state = {
   categories: [
    {
@@ -71,3 +71,5 @@ export default class NavBar extends Component {
   );
  }
 }
+
+export default NavBar;

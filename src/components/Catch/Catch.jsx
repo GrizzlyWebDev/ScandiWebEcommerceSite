@@ -8,7 +8,7 @@ export default class Catch extends Component {
  render() {
   return (
    <div className="catchContainer">
-    <img src={four} alt="404 image" />
+    <img src={four} alt="404" />
     <div className="textContainer">
      <h1>Page Not Found...</h1>
      <p>perhaps it's time for some coffee.</p>

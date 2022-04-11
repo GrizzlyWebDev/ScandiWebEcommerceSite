@@ -1,10 +1,11 @@
 import { Component } from "react";
-import axios from "axios";
 // It is not advised to create your own html sanitizer
 // So I will import one from the experts
 import dompurify from "dompurify";
 
 import "./PDP.css";
+import { withParams } from "../../Hooks/useRouter";
+import { fetchProduct } from "../../Hooks/useQuery";
 import Catch from "../Catch/Catch";
 
 class PDP extends Component {
@@ -77,55 +78,14 @@ class PDP extends Component {
  }
 
  componentDidMount() {
-  let res;
-  const fetchProduct = async () => {
-   const query = `query($id: String!) {
-    product(id: $id) {
-      id
-      name
-      inStock
-      gallery
-      description
-      category
-      attributes {
-        id
-        name
-        type
-        items {
-          displayValue
-          value
-          id
-        }
-      }
-      prices {
-        currency {
-          label
-          symbol
-        }
-        amount
-      }
-      brand
-    }
-  }
-    `;
-   const variables = {
-    id: this.props.match.params.id,
-   };
-   try {
-    res = await axios({
-     method: "post",
-     url: "http://localhost:4000",
-     data: { query, variables },
-    });
-   } catch (err) {
-    console.log(err);
-   }
+  const fetch = async () => {
+   let res = await fetchProduct(this.props.match.params.id);
    res.data.data.product && this.setState({ product: res.data.data.product });
    res.data.data.product.gallery &&
     this.setState({ selectedImage: res.data.data.product.gallery[0] });
   };
-  fetchProduct();
+  fetch();
  }
 }
 
-export default PDP;
+export default withParams(PDP);
