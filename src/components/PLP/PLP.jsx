@@ -15,7 +15,7 @@ class PLP extends Component {
   const { products } = this.state;
   const { category } = this.props.match.params;
   return (
-   <main>
+   <main id="main">
     {products && (
      <div className="titleSection">
       <h1>{category ? category.toUpperCase() : "ALL"}</h1>

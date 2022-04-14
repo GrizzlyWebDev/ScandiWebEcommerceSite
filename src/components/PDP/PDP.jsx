@@ -7,11 +7,13 @@ import "./PDP.css";
 import { withParams } from "../../Hooks/useRouter";
 import { fetchProduct } from "../../Hooks/useQuery";
 import Catch from "../Catch/Catch";
+import { connect } from "react-redux";
 
 class PDP extends Component {
  state = {
   product: null,
   selectedImage: null,
+  selectedOptions: [],
  };
  render() {
   const { product, selectedImage } = this.state;
@@ -43,11 +45,40 @@ class PDP extends Component {
          <ul key={idx}>
           {attribute.items.map((item) => (
            <li key={item.id}>
-            {!item.value.includes("#") && <button>{item.displayValue}</button>}
+            {!item.value.includes("#") && (
+             <button
+              onClick={() =>
+               this.changeSelected(attribute.name, item.value, idx)
+              }
+              className={`${
+               this.state.selectedOptions[idx].name === attribute.name &&
+               this.state.selectedOptions[idx].selection === item.value
+                ? "selected"
+                : ""
+              }`}>
+              {item.displayValue}
+             </button>
+            )}
             {item.value.includes("#") && (
              <span
+              onClick={() =>
+               this.changeSelected(attribute.name, item.value, idx)
+              }
               className="swatch"
-              style={{ backgroundColor: `${item.value}` }}></span>
+              style={{ backgroundColor: `${item.value}` }}>
+              {this.state.selectedOptions[idx].name === attribute.name &&
+              this.state.selectedOptions[idx].selection === item.value ? (
+               <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="#FFF"
+                stroke="#1D1F22">
+                <path d="M20.285 2l-11.285 11.567-5.286-5.011-3.714 3.716 9 8.728 15-15.285z" />
+               </svg>
+              ) : null}
+             </span>
             )}
            </li>
           ))}
@@ -56,10 +87,17 @@ class PDP extends Component {
        ))}
        <p>PRICE:</p>
        <p>
-        {product.prices[0].currency.symbol}
-        {product.prices[0].amount}
+        {product.prices.map((price) => {
+         return price.currency.label === this.props.selectedCurrency.label
+          ? price.currency.symbol + price.amount
+          : null;
+        })}
        </p>
-       <button className="addToCartButton" disabled={!product.inStock}>
+       {!product.inStock && <p>This item is currently not in stock.</p>}
+       <button
+        className="addToCartButton"
+        disabled={!product.inStock}
+        onClick={this.addToCart}>
         ADD TO CART
        </button>
        <p
@@ -77,15 +115,73 @@ class PDP extends Component {
   }
  }
 
+ addToCart = () => {
+  let prod = {
+   brand: this.state.product.brand,
+   title: this.state.product.name,
+   thumb: this.state.product.gallery[0],
+   prices: this.state.product.prices,
+   options: this.state.product.attributes,
+   selectedOptions: this.state.selectedOptions,
+   quantity: 1,
+  };
+
+  if (this.props.cart) {
+   for (let i = 0; i < this.props.cart.length; i++) {
+    if (
+     this.props.cart[i].title === prod.title &&
+     this.props.cart[i].brand === prod.brand
+    ) {
+     return;
+    }
+   }
+  }
+
+  this.props.addToCart(prod);
+ };
+
+ changeSelected = (title, item, idx) => {
+  let options = [...this.state.selectedOptions];
+  options.splice(idx, 1, { name: title, selection: item });
+  this.setState({ selectedOptions: options });
+ };
+
  componentDidMount() {
   const fetch = async () => {
    let res = await fetchProduct(this.props.match.params.id);
+   let defaultOptions = [];
    res.data.data.product && this.setState({ product: res.data.data.product });
    res.data.data.product.gallery &&
     this.setState({ selectedImage: res.data.data.product.gallery[0] });
+   res.data.data.product.attributes &&
+    res.data.data.product.attributes.map((attribute) =>
+     defaultOptions.push({
+      name: attribute.name,
+      selection: attribute.items[0].value,
+     })
+    );
+   this.setState({ selectedOptions: defaultOptions });
   };
   fetch();
  }
 }
 
-export default withParams(PDP);
+const mapStateToProps = (state) => {
+ return {
+  selectedCurrency: state.selectedCurrency,
+  cart: state.cart,
+ };
+};
+
+const mapDispatchToProps = (dispatch) => {
+ return {
+  addToCart: (product) => {
+   dispatch({
+    type: "ADD_PRODUCT",
+    product: product,
+   });
+  },
+ };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(withParams(PDP));

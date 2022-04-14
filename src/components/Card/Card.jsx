@@ -1,10 +1,11 @@
 import { Component } from "react";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
 
 import "./Card.css";
 import cartIcon from "../../Assets/emptyCartWhite.png";
 
-export default class Card extends Component {
+class Card extends Component {
  render() {
   const { product } = this.props;
 
@@ -28,8 +29,14 @@ export default class Card extends Component {
        {product.brand} {product.name}
       </p>
       <span className="itemPrice">
-       {product.prices[0].currency.symbol}
-       {product.prices[0].amount}
+       {product.prices.map((price) => {
+        // map through product prices array
+        // if the product prices label equals selected currency label
+        // then return the symbol and label
+        return price.currency.label === this.props.selectedCurrency.label
+         ? price.currency.symbol + price.amount
+         : null;
+       })}
       </span>
      </div>
     </div>
@@ -37,3 +44,11 @@ export default class Card extends Component {
   );
  }
 }
+
+const mapStateToProps = (state) => {
+ return {
+  selectedCurrency: state.selectedCurrency,
+ };
+};
+
+export default connect(mapStateToProps)(Card);

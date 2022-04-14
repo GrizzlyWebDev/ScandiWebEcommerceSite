@@ -7,7 +7,7 @@ import PDP from "./components/PDP/PDP.jsx";
 import Cart from "./components/Cart.jsx";
 import Catch from "./components/Catch/Catch.jsx";
 
-export default class App extends Component {
+class App extends Component {
  render() {
   return (
    <BrowserRouter forceRefresh={true}>
@@ -23,3 +23,5 @@ export default class App extends Component {
   );
  }
 }
+
+export default App;
