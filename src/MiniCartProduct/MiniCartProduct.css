@@ -6,13 +6,23 @@
 }
 
 .miniDescription {
-    width: 33.33%;
+    width: 40%;
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
 }
 
 .miniDescription p {
     font-size: 16px;
     font-weight: 300;
-    padding: 5px 0;
+    margin-bottom: 8px;
+}
+
+.miniDescription h4 {
+    font-size: 16px;
+    font-weight: 300;
+    margin: 8px 0;
 }
 
 .miniDescription .price {
@@ -27,14 +37,15 @@
 
 .miniDescription span {
     display: inline-flex;
-    flex-direction: row;
     justify-content: center;
     align-items: center;
     font-size: 10px;
-    height: 40px;
-    width: 40px;
+    font-weight: 400;
+    height: 30px;
+    width: 30px;
+    padding: 20px;
     border: 1px solid #1D1F22;
-    margin-right: 10px;
+    margin-top: 8px;
 }
 
 .miniQuantityContainer {
@@ -56,19 +67,27 @@
     border: 1px solid #1D1F22;
     background: #fff;
     margin-right: 10px;
+    cursor: pointer;
+ }
+
+ .miniQuantityContainer button:hover {
+    color:#fff;
+    background: #1D1F22;
  }
 
  .miniProductImage {
-     display: flex;
-     justify-content: center;
-     align-items: center;
+     display: block;
      height: auto;
-     width: 33.33%;
+     width: 40%;
  }
 
  .miniProductImage img {
      height: 100%;
      width: 100%;
-     object-fit:contain;
+     object-fit:scale-down;
      overflow: hidden;
+ }
+
+ .miniProductImage img:hover {
+     filter: blur(.8px);
  }

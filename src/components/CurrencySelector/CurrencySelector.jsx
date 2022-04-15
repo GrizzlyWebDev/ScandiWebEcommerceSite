@@ -44,7 +44,6 @@ const mapDispatchToProps = (dispatch) => {
     type: "CHANGE_CURRENCY",
     currency: currency,
    });
-   localStorage.setItem("selectedCurrency", JSON.stringify(currency));
   },
  };
 };

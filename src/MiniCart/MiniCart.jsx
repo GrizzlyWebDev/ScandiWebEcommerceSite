@@ -1,5 +1,6 @@
 import { Component } from "react";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 import MiniCartProduct from "../MiniCartProduct/MiniCartProduct";
 
 import "./MiniCart.css";
@@ -11,7 +12,7 @@ class MiniCart extends Component {
 
  render() {
   return (
-   <div onClick={() => this.props.changeShowCart()} className="cartWrapper">
+   <>
     <div className="cartContainer">
      <h2>
       My Bag<span>, {this.props.quantity} items</span>
@@ -20,23 +21,37 @@ class MiniCart extends Component {
       this.props.cart.map((product, idx) => (
        <MiniCartProduct
         key={idx}
+        index={idx}
         quantity={this.props.quantity}
         product={product}
         currency={this.props.selectedCurrency}
+        changeShowCart={this.props.changeShowCart}
        />
       ))}
-     {!this.props.cart && <div className="noProducts">No Products Yet...</div>}
+     {this.props.quantity < 1 && (
+      <div className="noProducts">No Products Yet...</div>
+     )}
 
      <div className="totalContainer">
       <h2>Total</h2>
-      <p>$100.00</p>
+      <p>
+       {this.props.selectedCurrency.symbol}
+       {this.props.totalPrice.toFixed(2)}
+      </p>
      </div>
      <div className="miniCartActions">
-      <button className="outlinedButton">VIEW BAG</button>
-      <button className="addToCartButton">CHECK OUT</button>
+      <Link to="/cart">
+       <button className="outlinedButton">VIEW BAG</button>
+      </Link>
+      <Link to="/cart">
+       <button className="addToCartButton">CHECK OUT</button>
+      </Link>
      </div>
     </div>
-   </div>
+    <div
+     onClick={() => this.props.changeShowCart()}
+     className="cartWrapper"></div>
+   </>
   );
  }
 }

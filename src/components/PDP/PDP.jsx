@@ -14,6 +14,7 @@ class PDP extends Component {
   product: null,
   selectedImage: null,
   selectedOptions: [],
+  itemAdded: false,
  };
  render() {
   const { product, selectedImage } = this.state;
@@ -98,7 +99,7 @@ class PDP extends Component {
         className="addToCartButton"
         disabled={!product.inStock}
         onClick={this.addToCart}>
-        ADD TO CART
+        {this.state.itemAdded ? "ITEM IN CART" : "ADD TO CART"}
        </button>
        <p
         // render product description html string
@@ -117,6 +118,7 @@ class PDP extends Component {
 
  addToCart = () => {
   let prod = {
+   id: this.state.product.id,
    brand: this.state.product.brand,
    title: this.state.product.name,
    thumb: this.state.product.gallery[0],
@@ -132,6 +134,7 @@ class PDP extends Component {
      this.props.cart[i].title === prod.title &&
      this.props.cart[i].brand === prod.brand
     ) {
+     this.setState({ itemAdded: true });
      return;
     }
    }
@@ -163,6 +166,27 @@ class PDP extends Component {
    this.setState({ selectedOptions: defaultOptions });
   };
   fetch();
+ }
+
+ componentDidUpdate(prevProps) {
+  const fetch = async () => {
+   let res = await fetchProduct(this.props.match.params.id);
+   let defaultOptions = [];
+   res.data.data.product && this.setState({ product: res.data.data.product });
+   res.data.data.product.gallery &&
+    this.setState({ selectedImage: res.data.data.product.gallery[0] });
+   res.data.data.product.attributes &&
+    res.data.data.product.attributes.map((attribute) =>
+     defaultOptions.push({
+      name: attribute.name,
+      selection: attribute.items[0].value,
+     })
+    );
+   this.setState({ selectedOptions: defaultOptions });
+  };
+  if (this.props.match.params.id !== prevProps.match.params.id) {
+   fetch();
+  }
  }
 }
 

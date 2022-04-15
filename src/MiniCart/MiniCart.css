@@ -11,10 +11,11 @@
 .cartContainer {
     position: absolute;
     background: #fff;
-    padding: 10px;
-    top: 0;
+    padding: 15px;
+    top: 1;
     right: 10%;
-    width: 450px;
+    width: 325px;
+    z-index: 2;
 }
 
 .cartContainer h2 {
@@ -45,12 +46,17 @@
 .outlinedButton {
     background: #fff;
     border: 1px solid #1D1F22;
-    width: 50%;
+    width: 100%;
     font-size: 16px;
     margin-top: 30px;
     margin-right: 10px;
     padding: 15px 20px;
     cursor: pointer;
+}
+
+.outlinedButton:hover {
+    background: #1D1F22;
+    color: #fff
 }
 
 .noProducts {

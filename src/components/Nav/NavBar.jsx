@@ -16,6 +16,7 @@ class NavBar extends Component {
   showSelector: false,
   showCart: false,
   quantity: 0,
+  totalPrice: 0,
  };
  render() {
   return (
@@ -71,7 +72,7 @@ class NavBar extends Component {
        onClick={() => this.setState({ showCart: !this.state.showCart })}
        className="cartIconContainer">
        <img className="cartIcon" src={cartIcon} alt="shopping cart icon" />
-       {this.props.cart && (
+       {this.props.cart && this.state.quantity > 0 && (
         <span className="itemsInCart">{this.state.quantity}</span>
        )}
       </div>
@@ -80,6 +81,7 @@ class NavBar extends Component {
     {this.state.showCart && (
      <MiniCart
       quantity={this.state.quantity}
+      totalPrice={this.state.totalPrice}
       changeShowCart={this.changeShowCart}
      />
     )}
@@ -110,16 +112,36 @@ class NavBar extends Component {
    this.setState({ categories: res.data.data.categories });
   };
   fetch();
+  let quant = 0;
+  let total = 0;
+  this.props.cart &&
+   this.props.cart.map((item) => (quant = item.quantity + quant));
+  this.props.cart &&
+   this.props.cart.map((item) =>
+    item.prices.map((price) =>
+     this.props.selectedCurrency.label === price.currency.label
+      ? (total = price.amount * item.quantity + total)
+      : null
+    )
+   );
+  this.setState({ quantity: quant, totalPrice: total });
  }
 
  componentDidUpdate(prevProps) {
   if (this.props !== prevProps) {
    let quant = 0;
+   let total = 0;
    this.props.cart &&
-    this.props.cart.map((item) => {
-     quant = item.quantity + quant;
-    });
-   this.setState({ quantity: quant });
+    this.props.cart.map((item) => (quant = item.quantity + quant));
+   this.props.cart &&
+    this.props.cart.map((item) =>
+     item.prices.map((price) =>
+      this.props.selectedCurrency.label === price.currency.label
+       ? (total = price.amount * item.quantity + total)
+       : null
+     )
+    );
+   this.setState({ quantity: quant, totalPrice: total });
   }
  }
 

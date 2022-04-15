@@ -1,8 +1,10 @@
 import { Component } from "react";
+import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 
 import "./MiniCartProduct.css";
 
-export default class MiniCartProduct extends Component {
+class MiniCartProduct extends Component {
  render() {
   return (
    <div className="miniProductContainer">
@@ -18,7 +20,7 @@ export default class MiniCartProduct extends Component {
      </p>
      {this.props.product.selectedOptions.map((option) => (
       <div className="miniProductOption" key={option.name}>
-       <p>{option.name}</p>
+       <h4>{option.name}:</h4>
        {!option.selection.includes("#") ? (
         <span>{option.selection}</span>
        ) : (
@@ -30,14 +32,37 @@ export default class MiniCartProduct extends Component {
      ))}
     </div>
     <div className="miniQuantityContainer">
-     <button>+</button>
+     <button onClick={() => this.props.increment(this.props.index)}>+</button>
      <p>{this.props.product.quantity}</p>
-     <button>-</button>
+     <button onClick={() => this.props.decrement(this.props.index)}>-</button>
     </div>
     <div className="miniProductImage">
-     <img src={this.props.product.thumb} alt="product" />
+     <Link
+      onClick={() => this.props.changeShowCart()}
+      to={`/product/${this.props.product.id}`}>
+      <img src={this.props.product.thumb} alt="product" />
+     </Link>
     </div>
    </div>
   );
  }
 }
+
+const mapDispatchToProps = (dispatch) => {
+ return {
+  increment: (idx) => {
+   dispatch({
+    type: "INCREMENT_QUANTITY",
+    index: idx,
+   });
+  },
+  decrement: (idx) => {
+   dispatch({
+    type: "DECREMENT_QUANTITY",
+    index: idx,
+   });
+  },
+ };
+};
+
+export default connect(null, mapDispatchToProps)(MiniCartProduct);
