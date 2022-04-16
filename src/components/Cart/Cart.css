@@ -1,0 +1,22 @@
+.cartTitleSection {
+    width: 80%;
+    margin-left:auto;
+    margin-right:auto;
+    margin-top: 100px;
+}
+
+.cartTitleSection h1 {
+    font-size: 32px;
+    font-weight: 700;
+}
+
+.cartContainer {
+    margin-top:50px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+    width: 80%;
+    margin-left:auto;
+    margin-right:auto;
+}

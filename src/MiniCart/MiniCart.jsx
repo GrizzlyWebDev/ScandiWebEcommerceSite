@@ -13,7 +13,7 @@ class MiniCart extends Component {
  render() {
   return (
    <>
-    <div className="cartContainer">
+    <div className="miniCartContainer">
      <h2>
       My Bag<span>, {this.props.quantity} items</span>
      </h2>

@@ -53,7 +53,17 @@ class Card extends Component {
      {!product.inStock ||
       (product.attributes.length === 0 && (
        <button onClick={() => this.addToCart()} className="addToCart">
-        <img src={cartIcon} alt="add to cart icon" />
+        {!this.state.itemAdded && <img src={cartIcon} alt="add to cart icon" />}
+        {this.state.itemAdded && (
+         <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="#FFF">
+          <path d="M20.285 2l-11.285 11.567-5.286-5.011-3.714 3.716 9 8.728 15-15.285z" />
+         </svg>
+        )}
        </button>
       ))}
     </div>
@@ -150,6 +160,7 @@ class Card extends Component {
 
  componentDidUpdate(prevProps) {
   if (this.props.product !== prevProps.product) {
+   this.setState({ itemAdded: false });
    let defaultOptions = [];
 
    this.props.product.attributes &&
@@ -171,8 +182,9 @@ class Card extends Component {
    title: this.props.product.name,
    thumb: this.props.product.gallery[0],
    prices: this.props.product.prices,
-   options: this.props.product.attributes,
+   attributes: this.props.product.attributes,
    selectedOptions: this.state.selectedOptions,
+   gallery: this.props.product.gallery,
    quantity: 1,
   };
 

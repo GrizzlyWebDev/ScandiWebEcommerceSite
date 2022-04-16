@@ -4,7 +4,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import NavBar from "./components/Nav/NavBar.jsx";
 import PLP from "./components/PLP/PLP.jsx";
 import PDP from "./components/PDP/PDP.jsx";
-import Cart from "./components/Cart.jsx";
+import Cart from "./components/Cart/Cart.jsx";
 import Catch from "./components/Catch/Catch.jsx";
 
 class App extends Component {

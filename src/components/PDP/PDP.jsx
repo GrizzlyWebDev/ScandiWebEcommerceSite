@@ -123,8 +123,9 @@ class PDP extends Component {
    title: this.state.product.name,
    thumb: this.state.product.gallery[0],
    prices: this.state.product.prices,
-   options: this.state.product.attributes,
+   attributes: this.state.product.attributes,
    selectedOptions: this.state.selectedOptions,
+   gallery: this.state.product.gallery,
    quantity: 1,
   };
 
