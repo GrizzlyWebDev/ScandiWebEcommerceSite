@@ -11,6 +11,7 @@ import { connect } from "react-redux";
 
 class PDP extends Component {
  state = {
+  pageFound: true,
   product: null,
   selectedImage: null,
   selectedOptions: [],
@@ -19,7 +20,7 @@ class PDP extends Component {
  render() {
   const { product, selectedImage } = this.state;
 
-  if (product) {
+  if (this.state.pageFound && product) {
    return (
     <main>
      <div className="pdpContainer">
@@ -99,7 +100,7 @@ class PDP extends Component {
         className="addToCartButton"
         disabled={!product.inStock}
         onClick={this.addToCart}>
-        {this.state.itemAdded ? "ITEM IN CART" : "ADD TO CART"}
+        {this.state.itemAdded ? "ADDED TO CART" : "ADD TO CART"}
        </button>
        <p
         // render product description html string
@@ -111,12 +112,18 @@ class PDP extends Component {
      </div>
     </main>
    );
-  } else {
+  } else if (!this.state.pageFound) {
    return <Catch />;
   }
  }
 
  addToCart = () => {
+  this.setState({ itemAdded: true });
+  setTimeout(() => {
+   this.setState({ itemAdded: false });
+  }, 300);
+  let contains;
+  let productIndex;
   let prod = {
    id: this.state.product.id,
    brand: this.state.product.brand,
@@ -129,19 +136,50 @@ class PDP extends Component {
    quantity: 1,
   };
 
-  if (this.props.cart) {
-   for (let i = 0; i < this.props.cart.length; i++) {
-    if (
-     this.props.cart[i].title === prod.title &&
-     this.props.cart[i].brand === prod.brand
-    ) {
-     this.setState({ itemAdded: true });
-     return;
+  if (this.props.cart.length > 0) {
+   if (prod.selectedOptions.length === 0) {
+    for (let i = 0; i < this.props.cart.length; i++) {
+     if (
+      this.props.cart[i].title === prod.title &&
+      this.props.cart[i].brand === prod.brand
+     ) {
+      contains = true;
+      productIndex = i;
+      break;
+     } else {
+      contains = false;
+     }
+    }
+    if (contains === true) {
+     this.props.increment(productIndex);
+    } else {
+     this.props.addToCart(prod);
+    }
+    return;
+   } else {
+    for (let i = 0; i < this.props.cart.length; i++) {
+     if (
+      this.props.cart[i].selectedOptions.every(
+       (option, idx) => option.selection === prod.selectedOptions[idx].selection
+      ) &&
+      this.props.cart[i].selectedOptions.length > 0
+     ) {
+      contains = true;
+      productIndex = i;
+      break;
+     } else {
+      contains = false;
+     }
+    }
+    if (contains === true) {
+     this.props.increment(productIndex);
+    } else if (contains === false) {
+     this.props.addToCart(prod);
     }
    }
+  } else {
+   this.props.addToCart(prod);
   }
-
-  this.props.addToCart(prod);
  };
 
  changeSelected = (title, item, idx) => {
@@ -155,6 +193,7 @@ class PDP extends Component {
    let res = await fetchProduct(this.props.match.params.id);
    let defaultOptions = [];
    res.data.data.product && this.setState({ product: res.data.data.product });
+   !res.data.data.product && this.setState({ pageFound: false });
    res.data.data.product.gallery &&
     this.setState({ selectedImage: res.data.data.product.gallery[0] });
    res.data.data.product.attributes &&
@@ -204,6 +243,12 @@ const mapDispatchToProps = (dispatch) => {
    dispatch({
     type: "ADD_PRODUCT",
     product: product,
+   });
+  },
+  increment: (idx) => {
+   dispatch({
+    type: "INCREMENT_QUANTITY",
+    index: idx,
    });
   },
  };

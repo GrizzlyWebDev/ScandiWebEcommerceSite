@@ -10,10 +10,7 @@
 }
 
 .cartProductdescription {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    height: 100%;
+    
 }
 
 .cartProductdescription h2 {
@@ -38,17 +35,32 @@
     flex-wrap: wrap;
 }
 
-.cartProductdescription span {
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 10px;
-    font-weight: 400;
-    height: 30px;
-    width: 30px;
-    padding: 20px;
+.cartProductdescription button {
     border: 1px solid #1D1F22;
-    margin-top: 8px;
+    padding: 5px;
+    height: 50px;
+    width: 70px;
+    background: none;
+    font-size: 16px;
+    font-weight: 400;
+    cursor: pointer;
+    margin: 0 10px 10px 0;
+}
+
+.cartProductdescription button:hover {
+    background: #1D1F22;
+    color: #fff;
+}
+
+.cartProductdescription .selected {
+    color: #fff;
+    background: #1D1F22;
+}
+
+.cartProductdescription p {
+    font-size:18px;
+    font-weight: 600;
+    margin-bottom: 10px;;
 }
 
 .productDisplayContainer {
@@ -66,12 +78,12 @@
 }
 
 .quantityContainer button {
-    font-size: 20px;
+    font-size: 24px;
     display: inline-flex;
     justify-content: center;
     align-items: center;
-    height: 25px;
-    width: 25px;
+    height: 40px;
+    width: 40px;
     border: 1px solid #1D1F22;
     background: #fff;
     margin-right: 10px;
@@ -83,10 +95,17 @@
     background: #1D1F22;
  }
 
+ .quantityContainer p {
+     font-size: 24px;
+     font-weight: 500;
+ }
+
  .productImage {
+     position: relative;
      display: block;
      height: 100%;
      width: 300px;
+     margin-left:10px;
  }
 
  .productImage img {
@@ -97,5 +116,48 @@
  }
 
  .productImage img:hover {
-     filter: blur(.8px);
+    filter:blur(.8px);
+    z-index: 0;
  }
+
+ .productImage:hover .slideContainer{
+     visibility: visible;
+ }
+
+ .slideContainer {
+     position: absolute;
+     visibility: hidden;
+     z-index: 2;
+     bottom: 50%;
+     display:flex;
+     justify-content: space-between;
+     width: 100%;
+ }
+
+ .slideContainer button {
+     cursor: pointer;
+     background: transparent;
+     border:none;
+ }
+
+ .slideButtonLeft svg {
+    fill: #1D1F22;
+    stroke: #1D1F22;
+ }
+
+ .slideButtonRight svg {
+    fill: #1D1F22;
+    stroke: #1D1F22;
+ }
+
+ .slideButtonLeft svg:hover {
+     fill: #363a3f;
+     stroke:#363a3f;
+     transform: translateX(-2px);
+ }
+
+ .slideButtonRight svg:hover {
+    fill: #363a3f;
+    stroke:#363a3f;
+    transform: translateX(2px);
+}

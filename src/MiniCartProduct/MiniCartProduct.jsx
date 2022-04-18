@@ -14,7 +14,8 @@ class MiniCartProduct extends Component {
      <p className="price">
       {this.props.product.prices.map((price) => {
        return price.currency.label === this.props.currency.label
-        ? price.currency.symbol + price.amount
+        ? price.currency.symbol +
+           (price.amount * this.props.product.quantity).toFixed(2)
         : null;
       })}
      </p>

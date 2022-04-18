@@ -1,19 +1,12 @@
-const initState = {
-  selectedCurrency: {
+const localState = {
+  selectedCurrency: JSON.parse(localStorage.getItem('selectedCurrency')) || {
     label: 'USD',
     symbol: '$',
   },
+  cart: JSON.parse(localStorage.getItem('cart')) || [],
 }
 
-const localState = {
-  selectedCurrency: JSON.parse(localStorage.getItem('selectedCurrency')),
-  cart: JSON.parse(localStorage.getItem('cart')),
-}
-
-const rootReducer = (
-  state = localStorage.length > 0 ? localState : initState,
-  action,
-) => {
+const rootReducer = (state = localState, action) => {
   if (action.type === 'CHANGE_CURRENCY') {
     localStorage.setItem(
       'selectedCurrency',
@@ -31,7 +24,7 @@ const rootReducer = (
     }
   }
   if (action.type === 'ADD_PRODUCT') {
-    if (state.cart) {
+    if (state.cart.length > 0) {
       localStorage.setItem(
         'cart',
         JSON.stringify([...state.cart, action.product]),
@@ -94,6 +87,31 @@ const rootReducer = (
       }
     }
   }
+
+  if (action.type === 'CHANGE_SELECTION') {
+    let updatedCart = []
+    state.cart.forEach((item, productIndex) => {
+      if (
+        item.title === action.productName &&
+        productIndex === action.productIndex
+      ) {
+        let tempOptions = [...item.selectedOptions]
+        tempOptions.splice(action.index, 1, {
+          name: action.title,
+          selection: action.selection,
+        })
+        updatedCart.push({ ...item, selectedOptions: tempOptions })
+      } else {
+        updatedCart.push(item)
+      }
+    })
+    localStorage.setItem('cart', JSON.stringify(updatedCart))
+    return {
+      ...state,
+      cart: updatedCart,
+    }
+  }
+
   return state
 }
 

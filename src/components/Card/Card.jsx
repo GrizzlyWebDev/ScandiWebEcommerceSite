@@ -117,7 +117,7 @@ class Card extends Component {
         </div>
        ))}
       <button onClick={() => this.addToCart()} className="addToCartButton">
-       {this.state.itemAdded ? "ITEM IN CART" : "ADD TO CART"}
+       {this.state.itemAdded ? "ADDED TO CART" : "ADD TO CART"}
       </button>
      </div>
     )}
@@ -175,7 +175,12 @@ class Card extends Component {
  }
 
  addToCart = () => {
+  let contains;
+  let productIndex;
   this.setState({ itemAdded: true });
+  setTimeout(() => {
+   this.setState({ itemAdded: false });
+  }, 300);
   let prod = {
    id: this.props.product.id,
    brand: this.props.product.brand,
@@ -188,19 +193,50 @@ class Card extends Component {
    quantity: 1,
   };
 
-  if (this.props.cart) {
-   for (let i = 0; i < this.props.cart.length; i++) {
-    if (
-     this.props.cart[i].title === prod.title &&
-     this.props.cart[i].brand === prod.brand
-    ) {
-     this.setState({ itemAdded: true });
-     return;
+  if (this.props.cart.length > 0) {
+   if (prod.selectedOptions.length === 0) {
+    for (let i = 0; i < this.props.cart.length; i++) {
+     if (
+      this.props.cart[i].title === prod.title &&
+      this.props.cart[i].brand === prod.brand
+     ) {
+      contains = true;
+      productIndex = i;
+      break;
+     } else {
+      contains = false;
+     }
+    }
+    if (contains === true) {
+     this.props.increment(productIndex);
+    } else {
+     this.props.addToCart(prod);
+    }
+    return;
+   } else {
+    for (let i = 0; i < this.props.cart.length; i++) {
+     if (
+      this.props.cart[i].selectedOptions.every(
+       (option, idx) => option.selection === prod.selectedOptions[idx].selection
+      ) &&
+      this.props.cart[i].selectedOptions.length > 0
+     ) {
+      contains = true;
+      productIndex = i;
+      break;
+     } else {
+      contains = false;
+     }
+    }
+    if (contains === true) {
+     this.props.increment(productIndex);
+    } else if (contains === false) {
+     this.props.addToCart(prod);
     }
    }
+  } else {
+   this.props.addToCart(prod);
   }
-
-  this.props.addToCart(prod);
  };
 }
 
@@ -217,6 +253,12 @@ const mapDispatchToProps = (dispatch) => {
    dispatch({
     type: "ADD_PRODUCT",
     product: product,
+   });
+  },
+  increment: (idx) => {
+   dispatch({
+    type: "INCREMENT_QUANTITY",
+    index: idx,
    });
   },
  };

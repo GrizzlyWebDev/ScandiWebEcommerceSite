@@ -5,11 +5,18 @@ import CartProducts from "../CartProducts/CartProducts";
 import "./Cart.css";
 
 class Cart extends Component {
+ state = {
+  cartTotal: 0,
+ };
  render() {
   return (
    <main>
     <div className="cartTitleSection">
      <h1>CART</h1>
+     <h2>
+      Total: {this.props.selectedCurrency.symbol}
+      {this.state.cartTotal.toFixed(2)}
+     </h2>
     </div>
     <div className="cartContainer">
      {this.props.cart &&
@@ -30,6 +37,39 @@ class Cart extends Component {
     </div>
    </main>
   );
+ }
+ componentDidMount() {
+  let quant = 0;
+  let total = 0;
+  this.props.cart &&
+   this.props.cart.map((item) => (quant = item.quantity + quant));
+  this.props.cart &&
+   this.props.cart.map((item) =>
+    item.prices.map((price) =>
+     this.props.selectedCurrency.label === price.currency.label
+      ? (total = price.amount * item.quantity + total)
+      : null
+    )
+   );
+  this.setState({ cartTotal: total });
+ }
+
+ componentDidUpdate(prevProps) {
+  if (this.props !== prevProps) {
+   let quant = 0;
+   let total = 0;
+   this.props.cart &&
+    this.props.cart.map((item) => (quant = item.quantity + quant));
+   this.props.cart &&
+    this.props.cart.map((item) =>
+     item.prices.map((price) =>
+      this.props.selectedCurrency.label === price.currency.label
+       ? (total = price.amount * item.quantity + total)
+       : null
+     )
+    );
+   this.setState({ cartTotal: total });
+  }
  }
 }
 
