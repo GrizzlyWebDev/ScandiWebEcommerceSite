@@ -8,7 +8,7 @@ import chevronIcon from "../../Assets/chevron.png";
 import CurrencySelector from "../CurrencySelector/CurrencySelector";
 import { NavLink } from "react-router-dom";
 import { fetchCategories } from "../../Hooks/useQuery";
-import MiniCart from "../../MiniCart/MiniCart";
+import MiniCart from "../MiniCart/MiniCart";
 
 class NavBar extends Component {
  state = {
