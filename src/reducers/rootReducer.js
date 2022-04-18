@@ -34,7 +34,7 @@ const rootReducer = (state = localState, action) => {
         cart: [...state.cart, action.product],
       }
     } else {
-      localStorage.setItem('cart', JSON.stringify(action.product))
+      localStorage.setItem('cart', JSON.stringify([action.product]))
       return {
         ...state,
         cart: [action.product],
