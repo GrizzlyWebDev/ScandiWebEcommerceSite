@@ -130,3 +130,39 @@ font-weight: 300;
     font-size: 18px;
     font-weight: 500;
 }
+
+.cardQuantityContainer {
+    display:flex;
+    flex-direction: column;
+}
+
+.cardQuantityContainer p {
+    margin: 30px 0 0 5px;
+}
+
+.cardQuantity {
+    display: flex;
+    justify-content: space-between;
+    align-items:center;
+}
+
+.cardQuantity button {
+    font-size: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 25px;
+    width: 25px;
+    border: 1px solid #1D1F22;
+    background: #fff;
+    cursor: pointer;
+}
+
+.cardQuantity p {
+    padding: 0;
+}
+
+.cardQuantity button:hover {
+    background: #1D1F22;
+    color:#fff;
+}

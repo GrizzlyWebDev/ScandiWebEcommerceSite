@@ -9,6 +9,7 @@ class Card extends Component {
  state = {
   showOptions: false,
   itemAdded: false,
+  productQuantity: 1,
  };
 
  render() {
@@ -116,6 +117,14 @@ class Card extends Component {
          </ul>
         </div>
        ))}
+      <div className="cardQuantityContainer">
+       <p>QUANTITY:</p>
+       <div className="cardQuantity">
+        <button onClick={() => this.decrement(this.props.index)}>-</button>
+        <p>{this.state.productQuantity}</p>
+        <button onClick={() => this.increment(this.props.index)}>+</button>
+       </div>
+      </div>
       <button onClick={() => this.addToCart()} className="addToCartButton">
        {this.state.itemAdded ? "ADDED TO CART" : "ADD TO CART"}
       </button>
@@ -139,6 +148,15 @@ class Card extends Component {
    </div>
   );
  }
+
+ increment = () => {
+  this.setState({ productQuantity: this.state.productQuantity + 1 });
+ };
+
+ decrement = () => {
+  this.state.productQuantity >= 2 &&
+   this.setState({ productQuantity: this.state.productQuantity - 1 });
+ };
 
  changeSelected = (title, item, idx) => {
   let options = [...this.state.selectedOptions];
@@ -190,7 +208,7 @@ class Card extends Component {
    attributes: this.props.product.attributes,
    selectedOptions: this.state.selectedOptions,
    gallery: this.props.product.gallery,
-   quantity: 1,
+   quantity: this.state.prouctQuantity,
   };
 
   if (this.props.cart.length > 0) {
@@ -229,7 +247,7 @@ class Card extends Component {
      }
     }
     if (contains === true) {
-     this.props.increment(productIndex);
+     this.props.increment(productIndex, this.state.productQuantity);
     } else if (contains === false) {
      this.props.addToCart(prod);
     }

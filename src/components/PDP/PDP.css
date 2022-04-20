@@ -129,3 +129,39 @@
 .addToCartButton:disabled {
     background: #5ece7cc2;
 }
+
+.productActions {
+    display: flex;
+    justify-content: space-between;
+    align-items:center;
+}
+
+.productActions p {
+    margin: 0;
+}
+
+.productActions button {
+    font-size: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 25px;
+    width: 25px;
+    border: 1px solid #1D1F22;
+    background: #fff;
+    cursor: pointer;
+}
+
+.productActions p {
+    margin-bottom: 20px;
+}
+
+.productActions button:hover {
+    background: #1D1F22;
+    color:#fff;
+}
+
+.pdpQuantity {
+    display: flex;
+    justify-content: space-between;
+}

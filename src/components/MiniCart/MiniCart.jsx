@@ -25,7 +25,6 @@ class MiniCart extends Component {
         quantity={this.props.quantity}
         product={product}
         currency={this.props.selectedCurrency}
-        changeShowCart={this.props.changeShowCart}
        />
       ))}
      {this.props.quantity < 1 && (
@@ -43,7 +42,7 @@ class MiniCart extends Component {
       <Link to="/cart">
        <button className="outlinedButton">VIEW BAG</button>
       </Link>
-      <Link to="/cart">
+      <Link to="/checkout">
        <button className="addToCartButton">CHECK OUT</button>
       </Link>
      </div>

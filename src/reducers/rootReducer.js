@@ -45,16 +45,30 @@ const rootReducer = (state = localState, action) => {
     if (!state.cart) {
       return
     } else {
-      let newCart = []
-      state.cart.map((item, i) =>
-        i === action.index
-          ? newCart.push({ ...item, quantity: item.quantity + 1 })
-          : newCart.push(item),
-      )
-      localStorage.setItem('cart', JSON.stringify(newCart))
-      return {
-        ...state,
-        cart: newCart,
+      if (action.amount) {
+        let newCart = []
+        state.cart.map((item, i) =>
+          i === action.index
+            ? newCart.push({ ...item, quantity: item.quantity + action.amount })
+            : newCart.push(item),
+        )
+        localStorage.setItem('cart', JSON.stringify(newCart))
+        return {
+          ...state,
+          cart: newCart,
+        }
+      } else {
+        let newCart = []
+        state.cart.map((item, i) =>
+          i === action.index
+            ? newCart.push({ ...item, quantity: item.quantity + 1 })
+            : newCart.push(item),
+        )
+        localStorage.setItem('cart', JSON.stringify(newCart))
+        return {
+          ...state,
+          cart: newCart,
+        }
       }
     }
   }

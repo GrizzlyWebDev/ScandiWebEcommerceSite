@@ -1,0 +1,113 @@
+.checkoutContainer {
+    margin-top:50px;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+    width: 80%;
+    margin-left:auto;
+    margin-right:auto;
+    margin-top: 100px;
+}
+
+.checkoutTitleSection {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-left:auto;
+    margin-right:auto;
+    margin-bottom: 20px;
+}
+
+.productDetails {
+    margin-right:30px;
+    border-top: 1px solid #E5E5E5;
+}
+
+.checkoutTitleSection h1 {
+    font-size: 32px;
+    font-weight: 700;
+}
+
+.cartSection {
+    width: 30%;
+}
+
+.checkoutSection {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    width: 50%;
+}
+
+.personalInfo h1 {
+    margin-bottom: 32px;
+}
+
+.personalInfo form {
+    border-top: 1px solid #E5E5E5;
+    border-bottom: 1px solid #E5E5E5;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    padding-top: 20px;
+    padding-bottom: 10px;
+}
+
+.personalInfo input {
+    font-family: 'Raleway', sans-serif;
+    font-size: 16px;
+    width: 45%;
+    margin-bottom: 20px;
+    border: 1px solid #1D1F22;
+    padding:10px;
+}
+
+
+.paymentInfo h1 {
+    margin: 32px 0;
+}
+
+.paymentInfo form {
+    border-top: 1px solid #E5E5E5;
+    border-bottom: 1px solid #E5E5E5;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    padding-top: 20px;
+    padding-bottom: 10px;
+}
+
+.paymentInfo input {
+    font-family: 'Raleway', sans-serif;
+    font-size: 16px;
+    width: 45%;
+    margin-bottom: 20px;
+    border: 1px solid #1D1F22;
+    padding:10px;
+}
+
+.checkoutActions {
+    display: flex;
+    justify-content: space-between;
+}
+
+.checkoutActions a {
+    width: 48%;
+}
+
+.checkoutButton {
+    width: 100%;
+    background: #5ECE7B;
+    color: #fff;
+    font-size: 16px;
+    margin-top: 30px;
+    border: 1px solid #5ECE7B;
+    padding: 15px 20px;
+    cursor: pointer;
+}
+
+.checkoutButton:hover {
+    background: #50af69;
+}

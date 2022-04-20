@@ -124,7 +124,7 @@
  .slideContainer {
      position: absolute;
      visibility: hidden;
-     z-index: 2;
+     z-index: 10;
      bottom: 50%;
      display:flex;
      justify-content: space-between;

@@ -15,6 +15,7 @@ class PDP extends Component {
   product: null,
   selectedImage: null,
   selectedOptions: [],
+  productQuantity: 1,
   itemAdded: false,
  };
  render() {
@@ -87,14 +88,28 @@ class PDP extends Component {
          </ul>
         </div>
        ))}
-       <p>PRICE:</p>
-       <p>
-        {product.prices.map((price) => {
-         return price.currency.label === this.props.selectedCurrency.label
-          ? price.currency.symbol + price.amount
-          : null;
-        })}
-       </p>
+       <div className="productActions">
+        <div className="productPrice">
+         <p>PRICE:</p>
+         <p>
+          {product.prices.map((price) => {
+           return price.currency.label === this.props.selectedCurrency.label
+            ? price.currency.symbol + price.amount
+            : null;
+          })}
+         </p>
+        </div>
+        <div>
+         <p>QUANTITY:</p>
+         <div className="pdpQuantity">
+          <button onClick={() => this.decrement(this.props.index)}>-</button>
+
+          <p>{this.state.productQuantity}</p>
+          <button onClick={() => this.increment(this.props.index)}>+</button>
+         </div>
+        </div>
+       </div>
+
        {!product.inStock && <p>This item is currently not in stock.</p>}
        <button
         className="addToCartButton"
@@ -117,6 +132,15 @@ class PDP extends Component {
   }
  }
 
+ increment = () => {
+  this.setState({ productQuantity: this.state.productQuantity + 1 });
+ };
+
+ decrement = () => {
+  this.state.productQuantity >= 2 &&
+   this.setState({ productQuantity: this.state.productQuantity - 1 });
+ };
+
  addToCart = () => {
   this.setState({ itemAdded: true });
   setTimeout(() => {
@@ -133,7 +157,7 @@ class PDP extends Component {
    attributes: this.state.product.attributes,
    selectedOptions: this.state.selectedOptions,
    gallery: this.state.product.gallery,
-   quantity: 1,
+   quantity: this.state.productQuantity,
   };
 
   if (this.props.cart.length > 0) {
@@ -151,7 +175,7 @@ class PDP extends Component {
      }
     }
     if (contains === true) {
-     this.props.increment(productIndex);
+     this.props.increment(productIndex, this.state.productQuantity);
     } else {
      this.props.addToCart(prod);
     }
@@ -172,7 +196,7 @@ class PDP extends Component {
      }
     }
     if (contains === true) {
-     this.props.increment(productIndex);
+     this.props.increment(productIndex, this.state.productQuantity);
     } else if (contains === false) {
      this.props.addToCart(prod);
     }
@@ -245,10 +269,11 @@ const mapDispatchToProps = (dispatch) => {
     product: product,
    });
   },
-  increment: (idx) => {
+  increment: (idx, quantity) => {
    dispatch({
     type: "INCREMENT_QUANTITY",
     index: idx,
+    amount: quantity,
    });
   },
  };

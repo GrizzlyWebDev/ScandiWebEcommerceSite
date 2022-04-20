@@ -6,6 +6,7 @@ import PLP from "./components/PLP/PLP.jsx";
 import PDP from "./components/PDP/PDP.jsx";
 import Cart from "./components/Cart/Cart.jsx";
 import Catch from "./components/Catch/Catch.jsx";
+import Checkout from "./components/Checkout/Checkout.jsx";
 
 class App extends Component {
  render() {
@@ -17,6 +18,7 @@ class App extends Component {
      <Route path="/:category" element={<PLP />} />
      <Route path="/product/:id" element={<PDP />} />
      <Route path="/cart" element={<Cart />} />
+     <Route path="/checkout" element={<Checkout />} />
      <Route path="*" element={<Catch />} />
     </Routes>
    </BrowserRouter>
