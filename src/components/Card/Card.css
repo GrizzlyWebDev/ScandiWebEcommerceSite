@@ -75,10 +75,10 @@
     align-items: flex-start;
 }
 
-.cardOptions p {
+.cardOptions h4 {
  font-size: 14px;
  font-weight: 600;
- margin: 20px 0px 20px 5px;
+ margin: 30px 0 20px 5px;
 }
 
 .cardOptions span {
@@ -136,14 +136,11 @@ font-weight: 300;
     flex-direction: column;
 }
 
-.cardQuantityContainer p {
-    margin: 30px 0 0 5px;
-}
-
 .cardQuantity {
     display: flex;
     justify-content: space-between;
     align-items:center;
+    margin-left:5px;
 }
 
 .cardQuantity button {

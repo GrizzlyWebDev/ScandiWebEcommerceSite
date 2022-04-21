@@ -11,20 +11,25 @@ class CurrencySelector extends Component {
 
  render() {
   return (
-   <div className="currencySelector">
-    <ul>
-     {this.state.currencies &&
-      this.state.currencies.map((currency) => (
-       <li
-        onClick={() => this.props.changeCurrency(currency)}
-        className="currency"
-        key={currency.label}>
-        <p>{currency.symbol}</p>
-        <p>{currency.label}</p>
-       </li>
-      ))}
-    </ul>
-   </div>
+   <>
+    <div
+     onClick={() => this.props.changeShowSelector()}
+     className="currencyWrapper"></div>
+    <div className="currencySelector">
+     <ul onClick={() => this.props.changeShowSelector()}>
+      {this.state.currencies &&
+       this.state.currencies.map((currency) => (
+        <li
+         onClick={() => this.props.changeCurrency(currency)}
+         className="currency"
+         key={currency.label}>
+         <p>{currency.symbol}</p>
+         <p>{currency.label}</p>
+        </li>
+       ))}
+     </ul>
+    </div>
+   </>
   );
  }
 

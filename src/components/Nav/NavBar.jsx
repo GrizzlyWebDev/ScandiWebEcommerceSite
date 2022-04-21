@@ -64,9 +64,6 @@ class NavBar extends Component {
          />
         )}
        </span>
-       {this.state.showSelector && (
-        <CurrencySelector showSelector={this.state.showSelector} />
-       )}
       </div>
       <div
        onClick={() => this.setState({ showCart: !this.state.showCart })}
@@ -78,6 +75,9 @@ class NavBar extends Component {
       </div>
      </div>
     </header>
+    {this.state.showSelector && (
+     <CurrencySelector changeShowSelector={this.changeShowSelector} />
+    )}
     {this.state.showCart && (
      <MiniCart
       quantity={this.state.quantity}
@@ -89,24 +89,15 @@ class NavBar extends Component {
   );
  }
 
- handleOutsideClick = (e) => {
-  if (
-   e.target.className !== "chevronContainer" &&
-   e.target.className !== "chevronIcon" &&
-   e.target.className !== "currencyIcon" &&
-   e.target.className !== "currency" &&
-   e.target.className !== "currencyContainer"
-  ) {
-   this.setState({ showSelector: false });
-  }
- };
-
  changeShowCart = () => {
   this.setState({ showCart: !this.state.showCart });
  };
 
+ changeShowSelector = () => {
+  this.setState({ showSelector: !this.state.showSelector });
+ };
+
  componentDidMount() {
-  document.body.addEventListener("click", (e) => this.handleOutsideClick(e));
   const fetch = async () => {
    let res = await fetchCategories();
    this.setState({ categories: res.data.data.categories });
@@ -143,10 +134,6 @@ class NavBar extends Component {
     );
    this.setState({ quantity: quant, totalPrice: total });
   }
- }
-
- componentWillUnmount() {
-  document.body.addEventListener("click", (e) => this.handleOutsideClick(e));
  }
 }
 

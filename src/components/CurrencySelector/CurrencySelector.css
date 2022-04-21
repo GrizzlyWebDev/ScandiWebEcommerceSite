@@ -1,6 +1,13 @@
+.currencyWrapper {
+    position:fixed;
+    background:transparent;
+    height:100%;
+    width:100vw;
+}
+
 .currencySelector {
     position: absolute;
-    top: 100%;
+    top: 0;
     right: 10%;
     padding: 20px 20px 20px 5px;
     box-shadow: 0px 4px 35px rgba(168, 172, 176, 0.19);
@@ -21,6 +28,7 @@
     display: flex;
     justify-content: flex-start;
     padding: 10px 10px 10px 0;
+    cursor: pointer;
 }
 
 .currencySelector li p {

@@ -73,7 +73,7 @@ class Card extends Component {
       {this.state &&
        product.attributes.map((attribute, idx) => (
         <div className="productAttributes" key={idx}>
-         <p key={attribute.id}>{attribute.name.toUpperCase()}:</p>
+         <h4 key={attribute.id}>{attribute.name.toUpperCase()}:</h4>
          <ul key={idx}>
           {attribute.items.map((item) => (
            <li key={item.id}>
@@ -118,11 +118,11 @@ class Card extends Component {
         </div>
        ))}
       <div className="cardQuantityContainer">
-       <p>QUANTITY:</p>
+       <h4>QUANTITY:</h4>
        <div className="cardQuantity">
-        <button onClick={() => this.decrement(this.props.index)}>-</button>
+        <button onClick={() => this.decrement()}>-</button>
         <p>{this.state.productQuantity}</p>
-        <button onClick={() => this.increment(this.props.index)}>+</button>
+        <button onClick={() => this.increment()}>+</button>
        </div>
       </div>
       <button onClick={() => this.addToCart()} className="addToCartButton">
@@ -208,7 +208,7 @@ class Card extends Component {
    attributes: this.props.product.attributes,
    selectedOptions: this.state.selectedOptions,
    gallery: this.props.product.gallery,
-   quantity: this.state.prouctQuantity,
+   quantity: this.state.productQuantity,
   };
 
   if (this.props.cart.length > 0) {
@@ -273,10 +273,11 @@ const mapDispatchToProps = (dispatch) => {
     product: product,
    });
   },
-  increment: (idx) => {
+  increment: (idx, quantity) => {
    dispatch({
     type: "INCREMENT_QUANTITY",
     index: idx,
+    amount: quantity,
    });
   },
  };

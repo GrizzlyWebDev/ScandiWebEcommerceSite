@@ -1,9 +1,8 @@
 .cartWrapper {
-    margin-top: 10px;
-    position: absolute;
-    bottom: 1;
+    position: fixed;
     z-index: 1;
-    height:300vh;
+    top: 0;
+    height:100vh;
     width: 100vw;
     background: #48455c38;
 }
@@ -16,6 +15,7 @@
     right: 10%;
     width: 325px;
     z-index: 2;
+    margin-bottom: 20px;
 }
 
 .miniCartContainer h2 {
