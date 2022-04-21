@@ -81,35 +81,23 @@
  margin: 30px 0 20px 5px;
 }
 
-.card-options span {
-    margin: 20px 0px 20px 5px;
-    height: 20px;
-    width: 20px;
+.card-option {
+    margin-right: 10px;
     padding:10px;
     border: 1px solid #1D1F22;
     color: #1D1F22;
     font-size: 12px;
 }
 
-.card-options span:hover {
+.card-option:hover {
     background: #1D1F22;
     color:#fff;
 }
 
-.card-options .swatch {
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    height:30px;
-    width:30px;
-    padding:5px;
-    margin:0 0 0 10px;
-    border: 1px solid #1D1F22;
-    transition: all .2s ease-in-out;
-}
-
-.card-options .selected {
+.selected-card-option {
+    margin-right: 10px;
+    padding:10px;
+    font-size: 12px;
     background: #1D1F22;
     color:#fff;
 }
@@ -162,4 +150,23 @@ font-weight: 300;
 .card-quantity button:hover {
     background: #1D1F22;
     color:#fff;
+}
+
+.card-swatch { 
+    display: flex;
+    cursor: pointer;
+    height:25px;
+    width: 25px;
+}
+
+.card-swatch-outline {
+    padding:1px;
+    background: #1D1F22;
+    margin-right: 9px;
+}
+
+.active-card-swatch-outline {
+    padding: 1px;
+    margin-right: 8px;
+    border: 2px solid #5ECE7B;
 }

@@ -13,6 +13,9 @@ class CartProduct extends Component {
      <h2>{this.props.product.brand}</h2>
      <h4>{this.props.product.title}</h4>
      <p className="price">
+      {/* map through prices array in product
+       if the currency matches the selected currency
+       display that item */}
       {this.props.product.prices.map((price) => {
        return price.currency.label === this.props.currency.label
         ? price.currency.symbol +
@@ -24,6 +27,9 @@ class CartProduct extends Component {
       <div className="product-attributes" key={idx}>
        <p key={attribute.id}>{attribute.name.toUpperCase()}:</p>
        <ul key={idx}>
+        {/* loop through product attributes and display 
+         options for each attribute depending on if they
+         are an option or a swatch */}
         {attribute.items.map((item) => (
          <li key={item.id}>
           {!item.value.includes("#") && (
@@ -83,6 +89,7 @@ class CartProduct extends Component {
      <div className="product-image">
       {this.props.product.gallery.length > 1 && (
        <div className="slide-container">
+        {/* decrease index value of gallery if not equal to 0 */}
         <button
          onClick={() =>
           this.state.galleryIndex > 0 &&
@@ -102,6 +109,7 @@ class CartProduct extends Component {
         </button>
 
         <button
+         /* increase index of gallery to cycle through product photos */
          onClick={() =>
           this.state.galleryIndex < this.props.product.gallery.length - 1 &&
           this.setState({ galleryIndex: this.state.galleryIndex + 1 })
@@ -121,6 +129,7 @@ class CartProduct extends Component {
        </div>
       )}
       <Link
+       /* if you click on the image you can view the product page */
        onClick={() => this.props.changeShowCart()}
        to={`/product/${this.props.product.id}`}>
        <img

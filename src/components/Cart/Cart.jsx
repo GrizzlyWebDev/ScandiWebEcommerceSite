@@ -1,5 +1,6 @@
 import { Component } from "react";
 import { connect } from "react-redux";
+import { getTotal } from "../../Hooks/useHelperFunctions";
 import CartProducts from "../CartProducts/CartProducts";
 
 import "./Cart.css";
@@ -19,6 +20,8 @@ class Cart extends Component {
      </h2>
     </div>
     <div className="cart-container">
+     {/* if there are items in the cart loop through and
+      pass each item to the cart product component */}
      {this.props.cart &&
       this.props.cart.map((product, idx) => (
        <CartProducts
@@ -39,35 +42,15 @@ class Cart extends Component {
   );
  }
  componentDidMount() {
-  let quant = 0;
-  let total = 0;
-  this.props.cart &&
-   this.props.cart.map((item) => (quant = item.quantity + quant));
-  this.props.cart &&
-   this.props.cart.map((item) =>
-    item.prices.map((price) =>
-     this.props.selectedCurrency.label === price.currency.label
-      ? (total = price.amount * item.quantity + total)
-      : null
-    )
-   );
+  let result = getTotal(this.props.cart, this.props.selectedCurrency);
+  let total = result.total;
   this.setState({ cartTotal: total });
  }
 
  componentDidUpdate(prevProps) {
   if (this.props !== prevProps) {
-   let quant = 0;
-   let total = 0;
-   this.props.cart &&
-    this.props.cart.map((item) => (quant = item.quantity + quant));
-   this.props.cart &&
-    this.props.cart.map((item) =>
-     item.prices.map((price) =>
-      this.props.selectedCurrency.label === price.currency.label
-       ? (total = price.amount * item.quantity + total)
-       : null
-     )
-    );
+   let result = getTotal(this.props.cart, this.props.selectedCurrency);
+   let total = result.total;
    this.setState({ cartTotal: total });
   }
  }

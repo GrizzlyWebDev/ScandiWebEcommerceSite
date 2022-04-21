@@ -97,16 +97,6 @@
     width: 48%;
 }
 
-.button-outlined {
-    width: 100%;
-    background: #5ECE7B;
-    color: #fff;
-    font-size: 16px;
-    margin-top: 30px;
-    border: 1px solid #5ECE7B;
-    padding: 15px 20px;
-    cursor: pointer;
-}
 
 .checkout-button {
     width: 100%;
