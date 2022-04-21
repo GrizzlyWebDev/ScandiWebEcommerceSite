@@ -8,8 +8,8 @@ class CartProduct extends Component {
  state = { galleryIndex: 0 };
  render() {
   return (
-   <div className="productContainer">
-    <div className="cartProductdescription">
+   <div className="product-container">
+    <div className="cart-product-description">
      <h2>{this.props.product.brand}</h2>
      <h4>{this.props.product.title}</h4>
      <p className="price">
@@ -21,7 +21,7 @@ class CartProduct extends Component {
       })}
      </p>
      {this.props.product.attributes.map((attribute, idx) => (
-      <div className="productAttributes" key={idx}>
+      <div className="product-attributes" key={idx}>
        <p key={attribute.id}>{attribute.name.toUpperCase()}:</p>
        <ul key={idx}>
         {attribute.items.map((item) => (
@@ -47,31 +47,26 @@ class CartProduct extends Component {
            </button>
           )}
           {item.value.includes("#") && (
-           <span
-            onClick={() =>
-             this.props.changeSelection(
-              idx,
-              this.props.index,
-              attribute.name,
-              item.value,
-              this.props.product.title
-             )
-            }
-            className="swatch"
-            style={{ backgroundColor: `${item.value}` }}>
-            {this.props.product.selectedOptions[idx].name === attribute.name &&
-            this.props.product.selectedOptions[idx].selection === item.value ? (
-             <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="#FFF"
-              stroke="#1D1F22">
-              <path d="M20.285 2l-11.285 11.567-5.286-5.011-3.714 3.716 9 8.728 15-15.285z" />
-             </svg>
-            ) : null}
-           </span>
+           <div
+            className={`${
+             this.props.product.selectedOptions[idx].name === attribute.name &&
+             this.props.product.selectedOptions[idx].selection === item.value
+              ? "active-swatch-outline"
+              : "swatch-outline"
+            }`}>
+            <span
+             onClick={() =>
+              this.props.changeSelection(
+               idx,
+               this.props.index,
+               attribute.name,
+               item.value,
+               this.props.product.title
+              )
+             }
+             className="swatch"
+             style={{ backgroundColor: `${item.value}` }}></span>
+           </div>
           )}
          </li>
         ))}
@@ -79,25 +74,25 @@ class CartProduct extends Component {
       </div>
      ))}
     </div>
-    <div className="productDisplayContainer">
-     <div className="quantityContainer">
+    <div className="product-display-container">
+     <div className="quantity-container">
       <button onClick={() => this.props.increment(this.props.index)}>+</button>
       <p>{this.props.product.quantity}</p>
       <button onClick={() => this.props.decrement(this.props.index)}>-</button>
      </div>
-     <div className="productImage">
+     <div className="product-image">
       {this.props.product.gallery.length > 1 && (
-       <div className="slideContainer">
+       <div className="slide-container">
         <button
          onClick={() =>
           this.state.galleryIndex > 0 &&
           this.setState({ galleryIndex: this.state.galleryIndex - 1 })
          }
-         className="slideButtonLeft">
+         className="slide-button-left">
          <svg
           xmlns="http://www.w3.org/2000/svg"
-          width="30"
-          height="30"
+          width="16"
+          height="16"
           viewBox="0 0 16 16">
           <path
            fillRule="evenodd"
@@ -111,11 +106,11 @@ class CartProduct extends Component {
           this.state.galleryIndex < this.props.product.gallery.length - 1 &&
           this.setState({ galleryIndex: this.state.galleryIndex + 1 })
          }
-         className="slideButtonRight">
+         className="slide-button-right">
          <svg
           xmlns="http://www.w3.org/2000/svg"
-          width="30"
-          height="30"
+          width="16"
+          height="16"
           viewBox="0 0 16 16">
           <path
            fillRule="evenodd"

@@ -23,7 +23,7 @@ class NavBar extends Component {
    <>
     <header id="header">
      <nav>
-      <ul className="navLinks">
+      <ul className="nav-links">
        <li>
         <NavLink to="/">ALL</NavLink>
        </li>
@@ -38,27 +38,27 @@ class NavBar extends Component {
         )}
       </ul>
      </nav>
-     <div className="logoContainer">
-      <img className="shopLogo" alt="Shop Logo" src={logo} />
+     <div className="logo-container">
+      <img className="shop-logo" alt="Shop Logo" src={logo} />
      </div>
-     <div className="navButtons">
+     <div className="nav-buttons">
       <div
        onClick={() => this.setState({ showSelector: !this.state.showSelector })}
-       className="currencyContainer">
-       <span className="currencyIcon">
+       className="currency-container">
+       <span className="currency-icon">
         {this.props.selectedCurrency.symbol}
        </span>
-       <span className="chevronContainer">
+       <span className="chevron-container">
         {!this.state.showSelector && (
          <img
-          className="chevronIcon"
+          className="chevron-icon"
           src={chevronIcon}
           alt="chevron down Icon"
          />
         )}
         {this.state.showSelector && (
          <img
-          className="chevronUpIcon"
+          className="chevron-up-icon"
           src={chevronIcon}
           alt="chevron up Icon"
          />
@@ -67,10 +67,10 @@ class NavBar extends Component {
       </div>
       <div
        onClick={() => this.setState({ showCart: !this.state.showCart })}
-       className="cartIconContainer">
-       <img className="cartIcon" src={cartIcon} alt="shopping cart icon" />
+       className="cart-icon-container">
+       <img className="cart-icon" src={cartIcon} alt="shopping cart icon" />
        {this.props.cart && this.state.quantity > 0 && (
-        <span className="itemsInCart">{this.state.quantity}</span>
+        <span className="items-in-cart">{this.state.quantity}</span>
        )}
       </div>
      </div>

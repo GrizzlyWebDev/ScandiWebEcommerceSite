@@ -1,4 +1,4 @@
-.checkoutContainer {
+.checkout-container {
     margin-top:50px;
     display: flex;
     flex-direction: row;
@@ -10,7 +10,7 @@
     margin-top: 100px;
 }
 
-.checkoutTitleSection {
+.checkout-title-section {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -19,21 +19,21 @@
     margin-bottom: 20px;
 }
 
-.productDetails {
+.product-details {
     margin-right:30px;
     border-top: 1px solid #E5E5E5;
 }
 
-.checkoutTitleSection h1 {
+.checkout-title-section h1 {
     font-size: 32px;
     font-weight: 700;
 }
 
-.cartSection {
+.cart-section {
     width: 30%;
 }
 
-.checkoutSection {
+.checkout-section {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -41,11 +41,11 @@
     width: 50%;
 }
 
-.personalInfo h1 {
+.personal-info h1 {
     margin-bottom: 32px;
 }
 
-.personalInfo form {
+.personal-info form {
     border-top: 1px solid #E5E5E5;
     border-bottom: 1px solid #E5E5E5;
     display: flex;
@@ -55,7 +55,7 @@
     padding-bottom: 10px;
 }
 
-.personalInfo input {
+.personal-info input {
     font-family: 'Raleway', sans-serif;
     font-size: 16px;
     width: 45%;
@@ -65,11 +65,11 @@
 }
 
 
-.paymentInfo h1 {
+.payment-info h1 {
     margin: 32px 0;
 }
 
-.paymentInfo form {
+.payment-info form {
     border-top: 1px solid #E5E5E5;
     border-bottom: 1px solid #E5E5E5;
     display: flex;
@@ -79,7 +79,7 @@
     padding-bottom: 10px;
 }
 
-.paymentInfo input {
+.payment-info input {
     font-family: 'Raleway', sans-serif;
     font-size: 16px;
     width: 45%;
@@ -88,16 +88,16 @@
     padding:10px;
 }
 
-.checkoutActions {
+.checkout-actions {
     display: flex;
     justify-content: space-between;
 }
 
-.checkoutActions a {
+.checkout-actions a {
     width: 48%;
 }
 
-.checkoutButton {
+.button-outlined {
     width: 100%;
     background: #5ECE7B;
     color: #fff;
@@ -108,6 +108,17 @@
     cursor: pointer;
 }
 
-.checkoutButton:hover {
+.checkout-button {
+    width: 100%;
+    background: #5ECE7B;
+    color: #fff;
+    font-size: 16px;
+    margin-top: 30px;
+    border: 1px solid #5ECE7B;
+    padding: 15px 20px;
+    cursor: pointer;
+}
+
+.checkout-button:hover {
     background: #50af69;
 }

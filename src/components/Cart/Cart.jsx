@@ -11,14 +11,14 @@ class Cart extends Component {
  render() {
   return (
    <main>
-    <div className="cartTitleSection">
+    <div className="cart-title-section">
      <h1>CART</h1>
      <h2>
       Total: {this.props.selectedCurrency.symbol}
       {this.state.cartTotal.toFixed(2)}
      </h2>
     </div>
-    <div className="cartContainer">
+    <div className="cart-container">
      {this.props.cart &&
       this.props.cart.map((product, idx) => (
        <CartProducts

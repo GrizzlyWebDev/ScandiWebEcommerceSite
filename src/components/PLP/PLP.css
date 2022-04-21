@@ -1,6 +1,6 @@
 
 
-.titleSection {
+.title-section {
     display: flex;
     justify-content: flex-start;
     align-items: center;
@@ -11,24 +11,10 @@
     margin-bottom: 100px;
 }
 
-h1 {
+.title-section h1 {
     font-style: normal;
     font-weight: 400;
     font-size: 42px;
     line-height: 160%;
 }
 
-.badge {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 20px;
-    font-weight: bold;
-    color: white;
-    background-color: gray;
-    padding: 8px 8px 10px 8px;
-    height: 30px;
-    width: auto;
-    margin-left: 10px;
-    border-radius: 5px;
-}

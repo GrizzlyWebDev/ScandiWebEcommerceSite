@@ -1,4 +1,4 @@
-.cartTitleSection {
+.cart-title-section {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -8,12 +8,12 @@
     margin-top: 100px;
 }
 
-.cartTitleSection h1 {
+.cart-title-section h1 {
     font-size: 32px;
     font-weight: 700;
 }
 
-.cartContainer {
+.cart-container {
     margin-top:50px;
     display: flex;
     flex-direction: column;

@@ -13,7 +13,7 @@ class MiniCart extends Component {
  render() {
   return (
    <>
-    <div className="miniCartContainer">
+    <div className="mini-cart-container">
      <h2>
       My Bag<span>, {this.props.quantity} items</span>
      </h2>
@@ -28,28 +28,28 @@ class MiniCart extends Component {
        />
       ))}
      {this.props.quantity < 1 && (
-      <div className="noProducts">No Products Yet...</div>
+      <div className="no-products">No Products Yet...</div>
      )}
 
-     <div className="totalContainer">
+     <div className="total-container">
       <h2>Total</h2>
       <p>
        {this.props.selectedCurrency.symbol}
        {this.props.totalPrice.toFixed(2)}
       </p>
      </div>
-     <div className="miniCartActions">
+     <div className="mini-cart-actions">
       <Link to="/cart">
-       <button className="outlinedButton">VIEW BAG</button>
+       <button className="outlined-button">VIEW BAG</button>
       </Link>
       <Link to="/checkout">
-       <button className="addToCartButton">CHECK OUT</button>
+       <button className="add-to-cart-button">CHECK OUT</button>
       </Link>
      </div>
     </div>
     <div
      onClick={() => this.props.changeShowCart()}
-     className="cartWrapper"></div>
+     className="cart-wrapper"></div>
    </>
   );
  }

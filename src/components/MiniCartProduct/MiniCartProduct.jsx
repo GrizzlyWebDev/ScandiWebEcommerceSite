@@ -7,8 +7,8 @@ import "./MiniCartProduct.css";
 class MiniCartProduct extends Component {
  render() {
   return (
-   <div className="miniProductContainer">
-    <div className="miniDescription">
+   <div className="mini-product-container">
+    <div className="mini-description">
      <p>{this.props.product.brand}</p>
      <p>{this.props.product.title}</p>
      <p className="price">
@@ -19,25 +19,44 @@ class MiniCartProduct extends Component {
         : null;
       })}
      </p>
-     {this.props.product.selectedOptions.map((option) => (
-      <div className="miniProductOption" key={option.name}>
-       <h4>{option.name}:</h4>
-       {!option.selection.includes("#") ? (
-        <span>{option.selection}</span>
-       ) : (
-        <span
-         className="swatch"
-         style={{ backgroundColor: `${option.selection}` }}></span>
-       )}
+     {this.props.product.attributes.map((attribute, idx) => (
+      <div className="mini-product-attributes" key={idx}>
+       <p key={attribute.id}>{attribute.name.toUpperCase()}:</p>
+       <ul key={idx}>
+        {attribute.items.map((item) => (
+         <li key={item.id}>
+          {!item.value.includes("#") && (
+           <span
+            className={`${
+             this.props.product.selectedOptions[idx].name === attribute.name &&
+             this.props.product.selectedOptions[idx].selection === item.value
+              ? "selected-mini-option"
+              : "mini-option"
+            }`}>
+            {item.value}
+           </span>
+          )}
+          {item.value.includes("#") &&
+           this.props.product.selectedOptions[idx].name === attribute.name &&
+           this.props.product.selectedOptions[idx].selection === item.value && (
+            <div className="mini-active-swatch">
+             <span
+              className="mini-swatch"
+              style={{ backgroundColor: `${item.value}` }}></span>
+            </div>
+           )}
+         </li>
+        ))}
+       </ul>
       </div>
      ))}
     </div>
-    <div className="miniQuantityContainer">
+    <div className="mini-quantity-container">
      <button onClick={() => this.props.increment(this.props.index)}>+</button>
      <p>{this.props.product.quantity}</p>
      <button onClick={() => this.props.decrement(this.props.index)}>-</button>
     </div>
-    <div className="miniProductImage">
+    <div className="mini-product-image">
      <Link
       onClick={() => this.props.changeShowCart()}
       to={`/product/${this.props.product.id}`}>

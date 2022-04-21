@@ -11,19 +11,19 @@ class Checkout extends Component {
  };
  render() {
   return (
-   <main className="checkoutContainer">
-    <div className="cartSection">
-     <div className="checkoutTitleSection">
+   <main className="checkout-container">
+    <div className="cart-section">
+     <div className="checkout-title-section">
       <h1>CHECKOUT</h1>
       <h2>
        Total: {this.props.selectedCurrency.symbol}
        {this.state.cartTotal.toFixed(2)}
       </h2>
      </div>
-     <div className="checkoutCartContainer">
+     <div className="checkout-cart-container">
       {this.props.cart &&
        this.props.cart.map((product, idx) => (
-        <div key={idx} className="productDetails">
+        <div key={idx} className="product-details">
          <MiniCartProduct
           index={idx}
           quantity={this.props.quantity}
@@ -40,8 +40,8 @@ class Checkout extends Component {
       )}
      </div>
     </div>
-    <div className="checkoutSection">
-     <div className="personalInfo">
+    <div className="checkout-section">
+     <div className="personal-info">
       <h1>Shipping Info</h1>
       <form>
        <input
@@ -94,7 +94,7 @@ class Checkout extends Component {
        />
       </form>
      </div>
-     <div className="paymentInfo">
+     <div className="payment-info">
       <h1>Payment Info</h1>
       <form>
        <input
@@ -117,12 +117,12 @@ class Checkout extends Component {
        />
        <input type="number" id="CCV" placeholder="CCV" autoComplete="cc-csc" />
       </form>
-      <div className="checkoutActions">
+      <div className="checkout-actions">
        <Link to="/">
-        <button className="outlinedButton">CONTINUE SHOPPING</button>
+        <button className="outlined-button">CONTINUE SHOPPING</button>
        </Link>
        <Link to="/">
-        <button className="checkoutButton">PLACE ORDER</button>
+        <button className="checkout-button">PLACE ORDER</button>
        </Link>
       </div>
      </div>

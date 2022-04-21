@@ -1,5 +1,5 @@
 
-.productContainer {
+.product-container {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -10,29 +10,29 @@
 }
 
 
-.cartProductdescription h2 {
+.cart-product-description h2 {
     font-size: 30px;
     font-weight: 600;
     padding-bottom:10px;
 }
 
-.cartProductdescription h4 {
+.cart-product-description h4 {
     font-size: 30px;
     font-weight: 400;
     padding-bottom:20px;
 }
 
-.cartProductdescription .price {
+.cart-product-description .price {
     font-size:24px;
     font-weight: 700;
     padding-bottom: 20px;;
 }
 
-.productOption {
+.product-option {
     flex-wrap: wrap;
 }
 
-.cartProductdescription button {
+.cart-product-description button {
     border: 1px solid #1D1F22;
     padding: 5px;
     height: 50px;
@@ -44,37 +44,37 @@
     margin: 0 10px 10px 0;
 }
 
-.cartProductdescription button:hover {
+.cart-product-description button:hover {
     background: #1D1F22;
     color: #fff;
 }
 
-.cartProductdescription .selected {
+.cart-product-description .selected {
     color: #fff;
     background: #1D1F22;
 }
 
-.cartProductdescription p {
+.cart-product-description p {
     font-size:18px;
     font-weight: 600;
     margin-bottom: 10px;;
 }
 
-.productDisplayContainer {
+.product-display-container {
     display: flex;
     flex-direction: row;
     justify-content:flex-end;
     height:400px;
 }
 
-.quantityContainer {
+.quantity-container {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
 }
 
-.quantityContainer button {
+.quantity-container button {
     font-size: 24px;
     display: inline-flex;
     justify-content: center;
@@ -87,17 +87,17 @@
     cursor: pointer;
  }
 
- .quantityContainer button:hover {
+ .quantity-container button:hover {
     color:#fff;
     background: #1D1F22;
  }
 
- .quantityContainer p {
+ .quantity-container p {
      font-size: 24px;
      font-weight: 500;
  }
 
- .productImage {
+ .product-image {
      position: relative;
      display: block;
      height: 100%;
@@ -105,56 +105,63 @@
      margin-left:10px;
  }
 
- .productImage img {
+ .product-image img {
      height: 100%;
      width: 100%;
      object-fit:scale-down;
      overflow: hidden;
  }
 
- .productImage img:hover {
+ .product-image img:hover {
     filter:blur(.8px);
     z-index: 0;
  }
 
- .productImage:hover .slideContainer{
+ .product-image:hover .slide-container{
      visibility: visible;
  }
 
- .slideContainer {
+ .slide-container {
      position: absolute;
-     visibility: hidden;
+     visibility:hidden;
      z-index: 10;
-     bottom: 50%;
+     bottom: 5%;
      display:flex;
-     justify-content: space-between;
+     justify-content: flex-end;
      width: 100%;
  }
 
- .slideContainer button {
+ .slide-container button {
      cursor: pointer;
      background: transparent;
      border:none;
+     padding: 4px;
+     margin-right: 15px;
+     background:rgba(0, 0, 0, 0.73);
  }
 
- .slideButtonLeft svg {
-    fill: #1D1F22;
-    stroke: #1D1F22;
+ .slide-button-left svg {
+    fill: #fff;
  }
 
- .slideButtonRight svg {
-    fill: #1D1F22;
-    stroke: #1D1F22;
+ .slide-button-right svg {
+    fill: #fff;
  }
 
- .slideButtonLeft svg:hover {
-     fill: #363a3f;
-     stroke:#363a3f;
-     transform: translateX(-2px);
+ .slide-button-right:hover {
+transform: translateX(2px);
  }
 
- .slideButtonRight svg:hover {
-    fill: #363a3f;
-    stroke:#363a3f;
-    transform: translateX(2px);
+ .slide-button-left:hover {
+transform: translateX(-2px);
+}
+
+ .slide-button-left svg:hover {
+     fill: rgb(173, 171, 171);
+     
+ }
+
+ .slide-button-right svg:hover {
+    fill: rgb(173, 171, 171);
+    
 }

@@ -19,7 +19,7 @@ class PLP extends Component {
    return (
     <main id="main">
      {products && (
-      <div className="titleSection">
+      <div className="title-section">
        <h1>{category ? category.toUpperCase() : "ALL"}</h1>
       </div>
      )}

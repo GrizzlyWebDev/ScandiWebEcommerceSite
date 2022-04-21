@@ -16,8 +16,8 @@ class Card extends Component {
   const { product } = this.props;
 
   return (
-   <div className="cardBody">
-    <div className="cardImage">
+   <div className="card-body">
+    <div className="card-image">
      {product.inStock && (
       <Link to={`/product/${product.id}`}>
        <img src={product.gallery[0]} alt="product" />
@@ -25,21 +25,21 @@ class Card extends Component {
      )}
      {!product.inStock && (
       <Link to={`/product/${product.id}`}>
-       <img className="stockImage" src={product.gallery[0]} alt="product" />
+       <img className="stock-image" src={product.gallery[0]} alt="product" />
        <p className="stock">OUT OF STOCK</p>
       </Link>
      )}
      {product.inStock && !this.state.showOptions && (
       <button
        onClick={() => this.setState({ showOptions: !this.state.showOptions })}
-       className="addToCart">
+       className="add-to-cart">
        <img src={cartIcon} alt="add to cart icon" />
       </button>
      )}
      {product.inStock && this.state.showOptions && (
       <button
        onClick={() => this.setState({ showOptions: !this.state.showOptions })}
-       className="addToCart">
+       className="add-to-cart">
        <svg
         width="24"
         height="24"
@@ -53,7 +53,7 @@ class Card extends Component {
      )}
      {!product.inStock ||
       (product.attributes.length === 0 && (
-       <button onClick={() => this.addToCart()} className="addToCart">
+       <button onClick={() => this.addToCart()} className="add-to-cart">
         {!this.state.itemAdded && <img src={cartIcon} alt="add to cart icon" />}
         {this.state.itemAdded && (
          <svg
@@ -69,10 +69,10 @@ class Card extends Component {
       ))}
     </div>
     {this.state.showOptions && (
-     <div className="cardOptions">
+     <div className="card-options">
       {this.state &&
        product.attributes.map((attribute, idx) => (
-        <div className="productAttributes" key={idx}>
+        <div className="product-attributes" key={idx}>
          <h4 key={attribute.id}>{attribute.name.toUpperCase()}:</h4>
          <ul key={idx}>
           {attribute.items.map((item) => (
@@ -117,24 +117,24 @@ class Card extends Component {
          </ul>
         </div>
        ))}
-      <div className="cardQuantityContainer">
+      <div className="card-quantity-container">
        <h4>QUANTITY:</h4>
-       <div className="cardQuantity">
+       <div className="card-quantity">
         <button onClick={() => this.decrement()}>-</button>
         <p>{this.state.productQuantity}</p>
         <button onClick={() => this.increment()}>+</button>
        </div>
       </div>
-      <button onClick={() => this.addToCart()} className="addToCartButton">
+      <button onClick={() => this.addToCart()} className="add-to-cart-button">
        {this.state.itemAdded ? "ADDED TO CART" : "ADD TO CART"}
       </button>
      </div>
     )}
-    <div className="cardDescription">
-     <p className="itemName">
+    <div className="card-description">
+     <p className="item-name">
       {product.brand} {product.name}
      </p>
-     <span className="itemPrice">
+     <span className="item-price">
       {product.prices.map((price) => {
        // map through product prices array
        // if the product prices label equals selected currency label

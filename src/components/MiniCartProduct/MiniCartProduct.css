@@ -1,11 +1,11 @@
 
-.miniProductContainer {
+.mini-product-container {
     display: flex;
     justify-content:space-between;
     margin: 50px 0;
 }
 
-.miniDescription {
+.mini-description {
     width: 40%;
     display: inline-flex;
     flex-direction: column;
@@ -13,42 +13,64 @@
     align-items: flex-start;
 }
 
-.miniDescription p {
+.mini-description p {
     font-size: 16px;
     font-weight: 300;
     margin-bottom: 8px;
 }
 
-.miniDescription h4 {
+.mini-description h4 {
     font-size: 16px;
     font-weight: 300;
     margin: 8px 0;
 }
 
-.miniDescription .price {
+.mini-description .price {
     font-weight: 600;
     padding: 5px 0;
     margin-bottom: 30px;
 }
 
-.miniProductOption {
+
+.mini-product-attributes ul {
+    display: flex;
+    list-style: none;
+    flex-direction: row;
     flex-wrap: wrap;
 }
 
-.miniDescription span {
-    display: inline-flex;
+
+.mini-option {
+    display: flex;
     justify-content: center;
     align-items: center;
     font-size: 10px;
     font-weight: 400;
-    height: 30px;
-    width: 30px;
-    padding: 20px;
+    height: 24px;
+    width: 24px;
+    padding: 18px;
     border: 1px solid #1D1F22;
     margin-top: 8px;
+    margin-right:2px;
 }
 
-.miniQuantityContainer {
+.selected-mini-option {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 10px;
+    font-weight: 400;
+    height: 24px;
+    width: 24px;
+    padding:18px;
+    background: #1D1F22;
+    border: 1px solid #1D1F22;
+    color:#fff;
+    margin-top: 8px;
+    margin-right:2px;
+}
+
+.mini-quantity-container {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -57,7 +79,7 @@
     margin-left: auto;
 }
 
-.miniQuantityContainer button {
+.mini-quantity-container button {
     font-size: 20px;
     display: inline-flex;
     justify-content: center;
@@ -70,25 +92,46 @@
     cursor: pointer;
  }
 
- .miniQuantityContainer button:hover {
+ .mini-quantity-container button:hover {
     color:#fff;
     background: #1D1F22;
  }
 
 
- .miniProductImage {
+ .mini-product-image {
      display: block;
      height: auto;
      width: 40%;
  }
 
- .miniProductImage img {
+ .mini-product-image img {
      height: 100%;
      width: 100%;
      object-fit:scale-down;
      overflow: hidden;
  }
 
- .miniProductImage img:hover {
+ .mini-product-image img:hover {
      filter: blur(.8px);
+ }
+
+ .mini-swatch {
+     display: flex;
+     height: 24px;
+     width: 24px;
+     padding: 16px;
+ }
+
+.mini-active-swatch {
+    padding: 1.5px;
+    border: 1px solid #5ECE7B;
+}
+
+ .mini-swatch-outline {
+    padding:1px;
+    border: 1px solid #1D1F22;
+ }
+
+ .mini-product-attributes p {
+     margin-top:10px;
  }

@@ -1,4 +1,4 @@
-.cartWrapper {
+.cart-wrapper {
     position: fixed;
     z-index: 1;
     top: 0;
@@ -7,7 +7,7 @@
     background: #48455c38;
 }
 
-.miniCartContainer {
+.mini-cart-container {
     position: absolute;
     background: #fff;
     padding: 15px;
@@ -18,32 +18,32 @@
     margin-bottom: 20px;
 }
 
-.miniCartContainer h2 {
+.mini-cart-container h2 {
     font-size: 16px;
     font-weight: 700;
 }
 
-.miniCartContainer span {
+.mini-cart-container span {
     font-weight: 500;
 }
 
-.totalContainer {
+.total-container {
     display: flex;
     justify-content: space-between;
     margin-top: 40px;
 }
 
-.totalContainer p {
+.total-container p {
     font-size:16px;
     font-weight: 700;
 }
 
-.miniCartActions {
+.mini-cart-actions {
     display: flex;
     justify-content: space-between;
 }
 
-.outlinedButton {
+.outlined-button {
     background: #fff;
     border: 1px solid #1D1F22;
     width: 100%;
@@ -54,12 +54,12 @@
     cursor: pointer;
 }
 
-.outlinedButton:hover {
+.outlined-button:hover {
     background: #1D1F22;
     color: #fff
 }
 
-.noProducts {
+.no-products {
     margin: 50px 0;
     font-size: 16px;
     font-weight: 300;

@@ -1,5 +1,5 @@
 
-.cardBody {
+.card-body {
     justify-content: flex-start;
     padding: 15px;
     width: 100%;
@@ -8,20 +8,20 @@
     cursor: pointer;
 }
 
-.cardBody:hover {
+.card-body:hover {
     box-shadow: 0px 4px 35px rgba(168, 172, 176, 0.19);
 }
 
-.cardBody:hover .addToCart {
+.card-body:hover .add-to-cart {
     visibility: visible
 }
 
-.cardImage {
+.card-image {
     position: relative;
     height: 350px;
 }
 
-.stockImage {
+.stock-image {
     filter:blur(1px);
     opacity: 0.3;
 }
@@ -37,13 +37,13 @@
     right:25%;
 }
 
-.cardBody img {
+.card-body img {
     height: 100%;
     width: 100%;
     object-fit: scale-down;
 }
 
-.addToCart {
+.add-to-cart {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -59,29 +59,29 @@
     cursor: pointer;
 }
 
-.addToCart:hover {
+.add-tocart:hover {
     box-shadow: 0px 4px 35px rgba(168, 172, 176, 0.19);
     background-color:#65da84;
 }
 
-.addToCart img {
+.add-to-cart img {
     padding:14px;
 }
 
-.cardOptions {
+.card-options {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: flex-start;
 }
 
-.cardOptions h4 {
+.card-options h4 {
  font-size: 14px;
  font-weight: 600;
  margin: 30px 0 20px 5px;
 }
 
-.cardOptions span {
+.card-options span {
     margin: 20px 0px 20px 5px;
     height: 20px;
     width: 20px;
@@ -91,12 +91,12 @@
     font-size: 12px;
 }
 
-.cardOptions span:hover {
+.card-options span:hover {
     background: #1D1F22;
     color:#fff;
 }
 
-.cardOptions .swatch {
+.card-options .swatch {
     display: inline-flex;
     justify-content: center;
     align-items: center;
@@ -109,41 +109,41 @@
     transition: all .2s ease-in-out;
 }
 
-.cardOptions .selected {
+.card-options .selected {
     background: #1D1F22;
     color:#fff;
 }
 
 
 
-.cardDescription {
+.card-description {
     padding-top: 40px;
 }
 
-.itemName {
+.item-name {
 padding-bottom: 10px;
 font-size: 18px;
 font-weight: 300;
 }
 
-.itemPrice {
+.item-price {
     font-size: 18px;
     font-weight: 500;
 }
 
-.cardQuantityContainer {
+.card-quantity-container {
     display:flex;
     flex-direction: column;
 }
 
-.cardQuantity {
+.card-quantity {
     display: flex;
     justify-content: space-between;
     align-items:center;
     margin-left:5px;
 }
 
-.cardQuantity button {
+.card-quantity button {
     font-size: 20px;
     display: flex;
     justify-content: center;
@@ -155,11 +155,11 @@ font-weight: 300;
     cursor: pointer;
 }
 
-.cardQuantity p {
+.card-quantity p {
     padding: 0;
 }
 
-.cardQuantity button:hover {
+.card-quantity button:hover {
     background: #1D1F22;
     color:#fff;
 }

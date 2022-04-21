@@ -24,8 +24,8 @@ class PDP extends Component {
   if (this.state.pageFound && product) {
    return (
     <main>
-     <div className="pdpContainer">
-      <div className="productGallery">
+     <div className="pdp-container">
+      <div className="product-gallery">
        {product.gallery.map((pic, idx) => (
         <img
          onMouseOver={() => this.setState({ selectedImage: pic })}
@@ -36,14 +36,14 @@ class PDP extends Component {
         />
        ))}
       </div>
-      <div className="selectedImageContainer">
+      <div className="selected-image-container">
        <img src={selectedImage} alt="selected product" />
       </div>
-      <div className="actionsContainer">
+      <div className="actions-container">
        <h1>{product.brand}</h1>
        <h4>{product.name}</h4>
        {product.attributes.map((attribute, idx) => (
-        <div className="productAttributes" key={idx}>
+        <div className="product-attributes" key={idx}>
          <p key={attribute.id}>{attribute.name.toUpperCase()}:</p>
          <ul key={idx}>
           {attribute.items.map((item) => (
@@ -63,33 +63,28 @@ class PDP extends Component {
              </button>
             )}
             {item.value.includes("#") && (
-             <span
-              onClick={() =>
-               this.changeSelected(attribute.name, item.value, idx)
-              }
-              className="swatch"
-              style={{ backgroundColor: `${item.value}` }}>
-              {this.state.selectedOptions[idx].name === attribute.name &&
-              this.state.selectedOptions[idx].selection === item.value ? (
-               <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="#FFF"
-                stroke="#1D1F22">
-                <path d="M20.285 2l-11.285 11.567-5.286-5.011-3.714 3.716 9 8.728 15-15.285z" />
-               </svg>
-              ) : null}
-             </span>
+             <div
+              className={`${
+               this.state.selectedOptions[idx].name === attribute.name &&
+               this.state.selectedOptions[idx].selection === item.value
+                ? "active-swatch-outline"
+                : "swatch-outline"
+              }`}>
+              <span
+               onClick={() =>
+                this.changeSelected(attribute.name, item.value, idx)
+               }
+               className="swatch"
+               style={{ backgroundColor: `${item.value}` }}></span>
+             </div>
             )}
            </li>
           ))}
          </ul>
         </div>
        ))}
-       <div className="productActions">
-        <div className="productPrice">
+       <div className="product-actions">
+        <div className="product-price">
          <p>PRICE:</p>
          <p>
           {product.prices.map((price) => {
@@ -101,7 +96,7 @@ class PDP extends Component {
         </div>
         <div>
          <p>QUANTITY:</p>
-         <div className="pdpQuantity">
+         <div className="pdp-quantity">
           <button onClick={() => this.decrement(this.props.index)}>-</button>
 
           <p>{this.state.productQuantity}</p>
@@ -112,7 +107,7 @@ class PDP extends Component {
 
        {!product.inStock && <p>This item is currently not in stock.</p>}
        <button
-        className="addToCartButton"
+        className="add-to-cart-button"
         disabled={!product.inStock}
         onClick={this.addToCart}>
         {this.state.itemAdded ? "ADDED TO CART" : "ADD TO CART"}

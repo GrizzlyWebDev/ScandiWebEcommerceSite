@@ -14,8 +14,8 @@ class CurrencySelector extends Component {
    <>
     <div
      onClick={() => this.props.changeShowSelector()}
-     className="currencyWrapper"></div>
-    <div className="currencySelector">
+     className="currency-wrapper"></div>
+    <div className="currency-selector">
      <ul onClick={() => this.props.changeShowSelector()}>
       {this.state.currencies &&
        this.state.currencies.map((currency) => (
@@ -24,7 +24,7 @@ class CurrencySelector extends Component {
          className="currency"
          key={currency.label}>
          <p>{currency.symbol}</p>
-         <p>{currency.label}</p>
+         <h4>{currency.label}</h4>
         </li>
        ))}
      </ul>
