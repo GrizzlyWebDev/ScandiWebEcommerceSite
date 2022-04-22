@@ -4,6 +4,8 @@ import { connect } from "react-redux";
 
 import "./Card.css";
 import cartIcon from "../../Assets/emptyCartWhite.png";
+import AttributeButtons from "../AttributeButtons/AttributeButtons";
+import { checkCart } from "../../HelperFunctions/useHelperFunctions";
 
 class Card extends Component {
  state = {
@@ -73,70 +75,6 @@ class Card extends Component {
       </button>
      )}
     </div>
-    {/* show options for product when cart icon is clicked */}
-    {this.state.showOptions && (
-     <div className="card-options">
-      {/* if state exists then loop through products */}
-      {this.state &&
-       product.attributes.map((attribute, idx) => (
-        <div className="product-attributes" key={idx}>
-         <h4>{attribute.name.toUpperCase()}:</h4>
-         <ul>
-          {/* loop through the products attributes */}
-          {attribute.items.map((item) => (
-           <li key={item.id}>
-            {/* if option value does not include a hash return this */}
-            {!item.value.includes("#") && (
-             <span
-              onClick={() =>
-               this.changeSelected(attribute.name, item.value, idx)
-              }
-              /* if the option matches the currently selected option give it the selected class */
-              className={`${
-               this.state.selectedOptions[idx].name === attribute.name &&
-               this.state.selectedOptions[idx].selection === item.value
-                ? "selected-card-option"
-                : "card-option"
-              }`}>
-              {item.value}
-             </span>
-            )}
-            {/* if the option includes a hash that means it is a hex value so return a swatch */}
-            {item.value.includes("#") && (
-             <div
-              /* if option matches selected color give active class */
-              className={`${
-               this.state.selectedOptions[idx].name === attribute.name &&
-               this.state.selectedOptions[idx].selection === item.value
-                ? "active-card-swatch-outline"
-                : "card-swatch-outline"
-              }`}>
-              <span
-               onClick={() =>
-                this.changeSelected(attribute.name, item.value, idx)
-               }
-               className="card-swatch"
-               style={{ backgroundColor: `${item.value}` }}></span>
-             </div>
-            )}
-           </li>
-          ))}
-         </ul>
-        </div>
-       ))}
-      <div className="card-quantity-container">
-       <h4>QUANTITY:</h4>
-       <div className="card-quantity">
-        <button onClick={() => this.decrement()}>-</button>
-        <p>{this.state.productQuantity}</p>
-        <button onClick={() => this.increment()}>+</button>
-       </div>
-      </div>
-      <button onClick={() => this.addToCart()} className="add-to-cart-button">
-       {this.state.itemAdded ? "ADDED TO CART" : "ADD TO CART"}
-      </button>
-     </div>
-    )}
     <div className="card-description">
      <p className="item-name">
       {product.brand} {product.name}
@@ -152,6 +90,31 @@ class Card extends Component {
       })}
      </span>
     </div>
+    {/* show options for product when cart icon is clicked */}
+    {this.state.showOptions && (
+     <div>
+      {/* if state exists then loop through products */}
+      {this.state && (
+       <AttributeButtons
+        parent="card"
+        product={product}
+        changeSelectedDefault={this.changeSelectedDefault}
+        selectedOptions={this.state.selectedOptions}
+       />
+      )}
+      <div className="card-quantity-container">
+       <h4>QUANTITY:</h4>
+       <div className="card-quantity">
+        <button onClick={() => this.decrement()}>-</button>
+        <p>{this.state.productQuantity}</p>
+        <button onClick={() => this.increment()}>+</button>
+       </div>
+      </div>
+      <button onClick={() => this.addToCart()} className="add-to-cart-button">
+       {this.state.itemAdded ? "ADDED TO CART" : "ADD TO CART"}
+      </button>
+     </div>
+    )}
    </div>
   );
  }
@@ -165,7 +128,7 @@ class Card extends Component {
    this.setState({ productQuantity: this.state.productQuantity - 1 });
  };
 
- changeSelected = (title, item, idx) => {
+ changeSelectedDefault = (title, item, idx) => {
   // spread previous selected options
   let options = [...this.state.selectedOptions];
   // insert new option at index
@@ -208,79 +171,28 @@ class Card extends Component {
  }
 
  addToCart = () => {
-  // create bool to see if cart contains item already
-  let contains;
-  let productIndex;
-  // show added to cart on button
+  // change add to cart button text for 300 milliseconds for user feedback
   this.setState({ itemAdded: true });
-  // after 300 ms seconds change text back to add to cart
   setTimeout(() => {
    this.setState({ itemAdded: false });
   }, 300);
   // create object to hold the item you are adding to cart
-  let prod = {
-   id: this.props.product.id,
-   brand: this.props.product.brand,
-   title: this.props.product.name,
-   thumb: this.props.product.gallery[0],
-   prices: this.props.product.prices,
-   attributes: this.props.product.attributes,
-   selectedOptions: this.state.selectedOptions,
-   gallery: this.props.product.gallery,
-   quantity: this.state.productQuantity,
-  };
+  let response = checkCart(
+   this.props.cart,
+   this.props.product,
+   this.state.selectedOptions,
+   this.state.productQuantity
+  );
+  let contains = response.contains;
+  let productIndex = response.productIndex;
+  let prod = response.prod;
   // if there are items in the cart
   if (this.props.cart.length > 0) {
-   // if the item you are adding does not have any options
-   if (prod.selectedOptions.length === 0) {
-    for (let i = 0; i < this.props.cart.length; i++) {
-     // if item you are adding is already in the cart
-     // set the contains bool to true and grab the index of that item
-     if (
-      this.props.cart[i].title === prod.title &&
-      this.props.cart[i].brand === prod.brand
-     ) {
-      contains = true;
-      productIndex = i;
-      break;
-     } else {
-      contains = false;
-     }
-    }
-    // if item is in cart add 1 to the quantity
-    if (contains === true) {
-     this.props.increment(productIndex);
-     // if item is not in the cart add it to the cart
-    } else {
-     this.props.addToCart(prod);
-    }
-    return;
-   } else {
-    // if item has options loop through the cart
-    for (let i = 0; i < this.props.cart.length; i++) {
-     if (
-      // if all the selected options match an item in the cart
-      // then set contains bool to true and grab the index
-      this.props.cart[i].selectedOptions.every(
-       (option, idx) => option.selection === prod.selectedOptions[idx].selection
-      ) &&
-      this.props.cart[i].selectedOptions.length > 0
-     ) {
-      contains = true;
-      productIndex = i;
-      break;
-     } else {
-      contains = false;
-     }
-    }
-    // if the item is already in the cart then increment by the selected quantity
-    if (contains === true) {
-     this.props.increment(productIndex, this.state.productQuantity);
-     // if item with selected options is not in cart then add it
-    } else if (contains === false) {
-     this.props.addToCart(prod);
-    }
-   }
+   // if item is in cart increment by selected quantity
+   contains === true &&
+    this.props.increment(productIndex, this.state.productQuantity);
+   // if item is not in the cart add it to the cart
+   contains === false && this.props.addToCart(prod);
   } else {
    // if there is nothing in the cart just add the item
    this.props.addToCart(prod);

@@ -1,6 +1,6 @@
 import { Component } from "react";
 import { connect } from "react-redux";
-import { getTotal } from "../../Hooks/useHelperFunctions";
+import { getTotal } from "../../HelperFunctions/useHelperFunctions";
 import CartProducts from "../CartProducts/CartProducts";
 
 import "./Cart.css";

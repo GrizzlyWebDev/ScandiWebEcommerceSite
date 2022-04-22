@@ -7,8 +7,8 @@ import cartIcon from "../../Assets/emptyCart.svg";
 import chevronIcon from "../../Assets/chevron.png";
 import CurrencySelector from "../CurrencySelector/CurrencySelector";
 import { NavLink } from "react-router-dom";
-import { fetchCategories } from "../../Hooks/useQuery";
-import { getTotal } from "../../Hooks/useHelperFunctions";
+import { fetchCategories } from "../../HelperFunctions/queries";
+import { getTotal } from "../../HelperFunctions/useHelperFunctions";
 import MiniCart from "../MiniCart/MiniCart";
 
 class NavBar extends Component {
@@ -25,9 +25,13 @@ class NavBar extends Component {
     <header id="header">
      <nav>
       <ul className="nav-links">
+       {/* category all acts as the home page
+        all is active when on the home route */}
        <li>
         <NavLink to="/">ALL</NavLink>
        </li>
+       {/* if the category is not all map through and create
+       links for each category */}
        {this.state.categories &&
         this.state.categories.map(
          (cat) =>
@@ -50,6 +54,8 @@ class NavBar extends Component {
         {this.props.selectedCurrency.symbol}
        </span>
        <span className="chevron-container">
+        {/* if currency container is open show chevron up
+         otherwise show chevron down */}
         {!this.state.showSelector && (
          <img
           className="chevron-icon"
@@ -70,6 +76,8 @@ class NavBar extends Component {
        onClick={() => this.setState({ showCart: !this.state.showCart })}
        className="cart-icon-container">
        <img className="cart-icon" src={cartIcon} alt="shopping cart icon" />
+       {/* if items are in the cart and the quantity is more than one
+       then show the cart quantity badge */}
        {this.props.cart && this.state.quantity > 0 && (
         <span className="items-in-cart">{this.state.quantity}</span>
        )}
@@ -103,7 +111,9 @@ class NavBar extends Component {
    let res = await fetchCategories();
    this.setState({ categories: res.data.data.categories });
   };
+  // fetch the category list from server
   fetch();
+  // put cart and seclected currency into get total function
   let result = getTotal(this.props.cart, this.props.selectedCurrency);
   let total = result.total;
   let quant = result.quantity;
@@ -112,10 +122,10 @@ class NavBar extends Component {
 
  componentDidUpdate(prevProps) {
   if (this.props !== prevProps) {
+   // put cart and seclected currency into get total function
    let result = getTotal(this.props.cart, this.props.selectedCurrency);
    let total = result.total;
    let quant = result.quantity;
-   console.log(total);
    this.setState({ quantity: quant, totalPrice: total });
   }
  }

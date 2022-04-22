@@ -1,7 +1,7 @@
 import { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { getTotal } from "../../Hooks/useHelperFunctions";
+import { getTotal } from "../../HelperFunctions/useHelperFunctions";
 import MiniCartProduct from "../MiniCartProduct/MiniCartProduct";
 
 import "./Checkout.css";

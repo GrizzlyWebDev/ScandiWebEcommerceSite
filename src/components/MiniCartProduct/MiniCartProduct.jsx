@@ -1,6 +1,7 @@
 import { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+import AttributeButtons from "../AttributeButtons/AttributeButtons";
 
 import "./MiniCartProduct.css";
 
@@ -19,37 +20,7 @@ class MiniCartProduct extends Component {
         : null;
       })}
      </p>
-     {this.props.product.attributes.map((attribute, idx) => (
-      <div className="mini-product-attributes" key={idx}>
-       <p key={attribute.id}>{attribute.name.toUpperCase()}:</p>
-       <ul key={idx}>
-        {attribute.items.map((item) => (
-         <li key={item.id}>
-          {!item.value.includes("#") && (
-           <span
-            className={`${
-             this.props.product.selectedOptions[idx].name === attribute.name &&
-             this.props.product.selectedOptions[idx].selection === item.value
-              ? "selected-mini-option"
-              : "mini-option"
-            }`}>
-            {item.value}
-           </span>
-          )}
-          {item.value.includes("#") &&
-           this.props.product.selectedOptions[idx].name === attribute.name &&
-           this.props.product.selectedOptions[idx].selection === item.value && (
-            <div className="mini-active-swatch">
-             <span
-              className="mini-swatch"
-              style={{ backgroundColor: `${item.value}` }}></span>
-            </div>
-           )}
-         </li>
-        ))}
-       </ul>
-      </div>
-     ))}
+     <AttributeButtons parent={"mini"} product={this.props.product} />
     </div>
     <div className="mini-quantity-container">
      <button onClick={() => this.props.increment(this.props.index)}>+</button>
@@ -57,9 +28,7 @@ class MiniCartProduct extends Component {
      <button onClick={() => this.props.decrement(this.props.index)}>-</button>
     </div>
     <div className="mini-product-image">
-     <Link
-      onClick={() => this.props.changeShowCart()}
-      to={`/product/${this.props.product.id}`}>
+     <Link to={`/product/${this.props.product.id}`}>
       <img src={this.props.product.thumb} alt="product" />
      </Link>
     </div>

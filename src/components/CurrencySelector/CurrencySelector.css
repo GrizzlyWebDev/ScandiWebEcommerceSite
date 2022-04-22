@@ -13,6 +13,7 @@
     font-size: 18px;
     background: white;
     margin-top:60px;
+    z-index: 10;
 }
 
 .currency-selector ul {

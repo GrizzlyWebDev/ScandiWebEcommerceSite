@@ -1,6 +1,7 @@
 import { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+import AttributeButtons from "../AttributeButtons/AttributeButtons";
 
 import "./CartProducts.css";
 
@@ -23,62 +24,11 @@ class CartProduct extends Component {
         : null;
       })}
      </p>
-     {this.props.product.attributes.map((attribute, idx) => (
-      <div className="product-attributes" key={idx}>
-       <p key={attribute.id}>{attribute.name.toUpperCase()}:</p>
-       <ul key={idx}>
-        {/* loop through product attributes and display 
-         options for each attribute depending on if they
-         are an option or a swatch */}
-        {attribute.items.map((item) => (
-         <li key={item.id}>
-          {!item.value.includes("#") && (
-           <button
-            onClick={() =>
-             this.props.changeSelection(
-              idx,
-              this.props.index,
-              attribute.name,
-              item.value,
-              this.props.product.title
-             )
-            }
-            className={`${
-             this.props.product.selectedOptions[idx].name === attribute.name &&
-             this.props.product.selectedOptions[idx].selection === item.value
-              ? "selected"
-              : ""
-            }`}>
-            {item.displayValue}
-           </button>
-          )}
-          {item.value.includes("#") && (
-           <div
-            className={`${
-             this.props.product.selectedOptions[idx].name === attribute.name &&
-             this.props.product.selectedOptions[idx].selection === item.value
-              ? "active-swatch-outline"
-              : "swatch-outline"
-            }`}>
-            <span
-             onClick={() =>
-              this.props.changeSelection(
-               idx,
-               this.props.index,
-               attribute.name,
-               item.value,
-               this.props.product.title
-              )
-             }
-             className="swatch"
-             style={{ backgroundColor: `${item.value}` }}></span>
-           </div>
-          )}
-         </li>
-        ))}
-       </ul>
-      </div>
-     ))}
+     <AttributeButtons
+      parent={"cart"}
+      product={this.props.product}
+      index={this.props.index}
+     />
     </div>
     <div className="product-display-container">
      <div className="quantity-container">
@@ -130,7 +80,6 @@ class CartProduct extends Component {
       )}
       <Link
        /* if you click on the image you can view the product page */
-       onClick={() => this.props.changeShowCart()}
        to={`/product/${this.props.product.id}`}>
        <img
         src={this.props.product.gallery[this.state.galleryIndex]}
@@ -156,16 +105,6 @@ const mapDispatchToProps = (dispatch) => {
    dispatch({
     type: "DECREMENT_QUANTITY",
     index: idx,
-   });
-  },
-  changeSelection: (idx, productIndex, title, item, productName) => {
-   dispatch({
-    type: "CHANGE_SELECTION",
-    index: idx,
-    productIndex: productIndex,
-    title: title,
-    selection: item,
-    productName: productName,
    });
   },
  };

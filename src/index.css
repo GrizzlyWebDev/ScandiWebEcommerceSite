@@ -20,3 +20,6 @@ li, a {
     color: inherit;
 }
 
+ul {
+    list-style: none;
+}

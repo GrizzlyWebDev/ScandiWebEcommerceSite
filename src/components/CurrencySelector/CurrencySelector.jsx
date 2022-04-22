@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { fetchCurrencyList } from "../../Hooks/useQuery";
+import { fetchCurrencyList } from "../../HelperFunctions/queries";
 import { connect } from "react-redux";
 
 import "./CurrencySelector.css";
