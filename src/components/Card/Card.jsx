@@ -15,25 +15,27 @@ class Card extends Component {
  };
 
  render() {
-  const { product } = this.props;
-
   return (
    <div className="card-body">
     <div className="card-image">
-     {product.inStock && (
-      <Link to={`/product/${product.id}`}>
-       <img src={product.gallery[0]} alt="product" />
+     {this.props.product.inStock && (
+      <Link to={`/product/${this.props.product.id}`}>
+       <img src={this.props.product.gallery[0]} alt="product" />
       </Link>
      )}
      {/* if product is not in stock show out of stock filter */}
-     {!product.inStock && (
-      <Link to={`/product/${product.id}`}>
-       <img className="stock-image" src={product.gallery[0]} alt="product" />
+     {!this.props.product.inStock && (
+      <Link to={`/product/${this.props.product.id}`}>
+       <img
+        className="stock-image"
+        src={this.props.product.gallery[0]}
+        alt="product"
+       />
        <p className="stock">OUT OF STOCK</p>
       </Link>
      )}
      {/* if product is in stock show cart icon */}
-     {product.inStock && !this.state.showOptions && (
+     {this.props.product.inStock && !this.state.showOptions && (
       <button
        onClick={() => this.setState({ showOptions: !this.state.showOptions })}
        className="add-to-cart">
@@ -41,7 +43,7 @@ class Card extends Component {
       </button>
      )}
      {/* show X icon when options section is open */}
-     {product.inStock && this.state.showOptions && (
+     {this.props.product.inStock && this.state.showOptions && (
       <button
        onClick={() => this.setState({ showOptions: !this.state.showOptions })}
        className="add-to-cart">
@@ -57,7 +59,7 @@ class Card extends Component {
       </button>
      )}
      {/* if product does not have options use this button to add to cart */}
-     {product.attributes.length === 0 && (
+     {this.props.product.attributes.length === 0 && (
       <button onClick={() => this.addToCart()} className="add-to-cart">
        {/* show cart icon when itemAdded is false */}
        {!this.state.itemAdded && <img src={cartIcon} alt="add to cart icon" />}
@@ -77,10 +79,10 @@ class Card extends Component {
     </div>
     <div className="card-description">
      <p className="item-name">
-      {product.brand} {product.name}
+      {this.props.product.brand} {this.props.product.name}
      </p>
      <span className="item-price">
-      {product.prices.map((price) => {
+      {this.props.product.prices.map((price) => {
        /* map through product prices array
         if the product prices label equals selected currency label
         then return the symbol and label */
@@ -97,7 +99,7 @@ class Card extends Component {
       {this.state && (
        <AttributeButtons
         parent="card"
-        product={product}
+        product={this.props.product}
         changeSelectedDefault={this.changeSelectedDefault}
         selectedOptions={this.state.selectedOptions}
        />

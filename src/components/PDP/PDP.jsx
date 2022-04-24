@@ -10,10 +10,12 @@ import Catch from "../Catch/Catch";
 import { connect } from "react-redux";
 import AttributeButtons from "../AttributeButtons/AttributeButtons";
 import { checkCart } from "../../HelperFunctions/useHelperFunctions";
+import Loading from "../Loading/Loading";
 
 class PDP extends Component {
  state = {
   pageFound: true,
+  loading: true,
   product: null,
   selectedImage: null,
   selectedOptions: [],
@@ -94,7 +96,9 @@ class PDP extends Component {
     </main>
    );
    /* if no product is returned show 404 page */
-  } else if (!this.state.pageFound) {
+  } else if (this.state.loading) {
+   return <Loading />;
+  } else {
    return <Catch />;
   }
  }
@@ -154,6 +158,7 @@ class PDP extends Component {
    res.data.data.product && this.setState({ product: res.data.data.product });
    // if product is not found show 404 page
    if (!res.data.data.product) {
+    this.setState({ loading: false });
     this.setState({ pageFound: false });
     return;
    }

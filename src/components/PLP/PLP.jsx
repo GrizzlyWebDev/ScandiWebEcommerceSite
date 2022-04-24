@@ -5,29 +5,33 @@ import { withParams } from "../../HelperFunctions/routerWrapper";
 import { fetchProducts } from "../../HelperFunctions/queries";
 import Catch from "../Catch/Catch";
 import Card from "../Card/Card";
+import Loading from "../Loading/Loading";
 
 class PLP extends Component {
  state = {
   products: null,
   pageFound: true,
+  loading: true,
  };
 
  render() {
-  const { products } = this.state;
-  const { category } = this.props.match.params;
   // if category is found then show products
   // else show 404 page
-  if (products && this.state.pageFound) {
+  if (this.state.products && this.state.pageFound) {
    return (
     <main id="main">
-     {products && (
+     {this.state.products && (
       <>
        <div className="title-section">
-        <h1>{category ? category.toUpperCase() : "ALL"}</h1>
+        <h1>
+         {this.props.match.params.category
+          ? this.props.match.params.category.toUpperCase()
+          : "ALL"}
+        </h1>
        </div>
-       {products && (
+       {this.state.products && (
         <div className="products-container">
-         {products.map((prod) => (
+         {this.state.products.map((prod) => (
           <Card key={prod.id} product={prod} />
          ))}
         </div>
@@ -36,7 +40,9 @@ class PLP extends Component {
      )}
     </main>
    );
-  } else if (!this.state.pageFound) {
+  } else if (this.state.loading) {
+   return <Loading />;
+  } else {
    return <Catch />;
   }
  }
@@ -47,10 +53,16 @@ class PLP extends Component {
    let res = await fetchProducts(this.props.match.params.category);
    // if found set product state
    // else show 404 page
+   if (!res.data) {
+    this.setState({ loading: false });
+    this.setState({ pageFound: false });
+   }
    if (res.data.data.category) {
+    this.setState({ loading: false });
     this.setState({ products: res.data.data.category.products });
     this.setState({ pageFound: true });
    } else {
+    this.setState({ loading: false });
     this.setState({ pageFound: false });
    }
   };
